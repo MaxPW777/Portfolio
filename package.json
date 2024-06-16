@@ -1,0 +1,27 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "main-portfolio",
+  "scripts": {
+    "start:dev": "concurrently \"npm run start:frontend:dev\" \"npm run start:backend:dev\"",
+    "start:frontend:dev": "cd frontend && npm run dev",
+    "start:backend:dev": "cd backend && npm run start:dev",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd frontend && npm build && npm start",
+    "start:backend": "cd backend && npm start",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxPW777/Portfolio.git"
+  },
+  "author": "MaxPW777",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MaxPW777/Portfolio/issues"
+  },
+  "homepage": "https://github.com/MaxPW777/Portfolio#readme",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
