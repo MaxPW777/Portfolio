@@ -9,7 +9,7 @@ export class Comment extends Document implements ICommentDocument {
     @Prop()
     postID: string;
     @Prop()
-    authorID: string;
+    author: string;
     @Prop({default : Date.now})
     createdAt: Date;
     @Prop({default : Date.now})

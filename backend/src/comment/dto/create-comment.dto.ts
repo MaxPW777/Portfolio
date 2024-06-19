@@ -7,7 +7,7 @@ export class CreatePostDto {
 
     @IsNotEmpty()
     @IsString()
-    authorID: string;
+    author: string;
 
     @IsNotEmpty()
     @IsString()
