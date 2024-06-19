@@ -1,6 +1,6 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Document} from 'mongoose';
-import {ICommentDocument} from "@/comments/interfaces/comment.interface";
+import {ICommentDocument} from "@/comment/interfaces/comment.interface";
 
 @Schema()
 export class Comment extends Document implements ICommentDocument {

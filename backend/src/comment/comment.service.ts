@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {ICommentDocument} from "@/comments/interfaces/comment.interface";
+import {ICommentDocument} from "@/comment/interfaces/comment.interface";
 import {Model} from "mongoose";
 import {InjectModel} from "@nestjs/mongoose";
 
