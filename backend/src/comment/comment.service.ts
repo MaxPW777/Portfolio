@@ -2,6 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {ICommentDocument} from "@/comment/interfaces/comment.interface";
 import {Model} from "mongoose";
 import {InjectModel} from "@nestjs/mongoose";
+import {Comment} from "@/comment/schemas/comment.schema";
 
 @Injectable()
 export class CommentService {

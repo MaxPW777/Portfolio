@@ -5,7 +5,7 @@ import {MongooseModule} from "@nestjs/mongoose";
 import {UserModule} from "@/user/user.module";
 import {PostModule} from "@/post/post.module";
 import { AuthModule } from './auth/auth.module';
-import { CommentModule } from './comments/comment.module';
+import { CommentModule } from './comment/comment.module';
 
 require('dotenv').config();
 

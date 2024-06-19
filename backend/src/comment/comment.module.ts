@@ -13,5 +13,5 @@ import {Comment, CommentSchema} from "@/comment/schemas/comment.schema";
     providers: [CommentService],
     exports: [CommentService]
 })
-export class commentModule {
+export class CommentModule {
 }
