@@ -15,6 +15,10 @@ export class UserService{
         return this.userModel.find().exec()
     }
 
+    async findByName(username : string) : Promise<IUserDocument>{
+        return this.userModel.findOne({name : username}).exec()
+    }
+
     async create(user: CreateUserDto): Promise<IUserDocument> {
         const createdUser = new this.userModel(user);
         return createdUser.save();
