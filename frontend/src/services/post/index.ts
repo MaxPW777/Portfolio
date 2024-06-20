@@ -1,11 +1,15 @@
-import { useMutation, useQuery } from 'react-query';
+import {useMutation, useQuery, useQueryClient} from 'react-query';
 import { createPost, editPost, getPosts } from '@/services/post/routes';
 import { ICreatePostDto } from '@common/dto/ICreatePostDto';
 import { IEditPostDto } from '@common/dto/IEditPostDto';
 
 // Mutation for creating a post
 export const useCreatePostMutation = () => {
-    return useMutation((data: ICreatePostDto) => createPost(data));
+    const queryClient = useQueryClient()
+    return useMutation((data: ICreatePostDto) => createPost(data), {onSuccess: () => {
+        // Invalidate the posts query to refetch the data
+            queryClient.invalidateQueries('posts');}
+    });
 };
 
 // Query for fetching posts
