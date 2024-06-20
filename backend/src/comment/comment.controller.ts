@@ -12,7 +12,7 @@ export class CommentController {
         return this.commentService.getForPost(postID);
     }
 
-    @Post('create')
+    @Post()
     async createComment(@Body() comment: ICommentDocument): Promise<ICommentDocument> {
         return this.commentService.create(comment);
     }
