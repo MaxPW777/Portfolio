@@ -21,7 +21,7 @@ export class PostController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Post('create')
+    @Post()
     async create(@Body() createPostDto: CreatePostDto, @Req() req): Promise<IPostDocument>{
         const userId = req.user.userId; // Assumes the JWT strategy adds a `user` object to the reques
         return this.postService.create(createPostDto, userId)
