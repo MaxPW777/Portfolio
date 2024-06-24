@@ -6,7 +6,7 @@ import { useGetPostsQuery } from "@/services/post";
 import { IPost } from "@common/types/IPost";
 import NewPost from "@/components/blog/NewPost";
 
-const BlogPage: React.FC = () => {
+function BlogPage() {
     const [isLogged, setIsLogged] = useState(false);
     const query = useGetPostsQuery();
     const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
@@ -35,6 +35,6 @@ const BlogPage: React.FC = () => {
             </div>
         </>
     );
-};
+}
 
 export default BlogPage;

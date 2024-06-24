@@ -9,7 +9,7 @@ interface CommentAreaProps {
     onToggleExpand: (expand: boolean) => void;
 }
 
-const CommentArea: React.FC<CommentAreaProps> = ({ postId, onToggleExpand }) => {
+function CommentArea({ postId, onToggleExpand }: CommentAreaProps) {
     const query = useGetCommentsQuery(postId);
     const [showComments, setShowComments] = useState(false);
 
@@ -26,10 +26,10 @@ const CommentArea: React.FC<CommentAreaProps> = ({ postId, onToggleExpand }) => 
                     {showComments ? 'Hide comments' : 'See all comments'}
                 </button>
             </div>
-            <CommentForm />
+            <CommentForm postId={postId} />
             {showComments && <CommentList comments={query.data} />}
         </div>
     );
-};
+}
 
 export default CommentArea;
