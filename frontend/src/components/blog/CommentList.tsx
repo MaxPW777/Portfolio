@@ -7,11 +7,11 @@ interface CommentListProps {
 
 function CommentList({comments}: CommentListProps){
     return (
-        <div>
+        <div className={'flex flex-col'}>
             {comments && comments.map((comment) => (
-                <div>
+                <div className={'p-2 border rounded flex flex-col gap-2'}>
+                    <p>@{comment.author}</p>
                     <p>{comment.content}</p>
-                    <p>{comment.author}</p>
                 </div>
             ))}
         </div>
