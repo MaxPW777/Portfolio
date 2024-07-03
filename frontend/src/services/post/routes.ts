@@ -1,6 +1,7 @@
 import { ICreatePostDto } from '@common/dto/ICreatePostDto';
 import { IEditPostDto } from '@common/dto/IEditPostDto';
 import { API_URL } from '@common/utils/constants';
+import axios from '@/providers/axios';
 
 const POSTS_URL = `${API_URL}/post`;
 
@@ -10,15 +11,7 @@ export const getPosts = async () => {
 };
 
 export const createPost = async (data: ICreatePostDto) => {
-    const response = await fetch(POSTS_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('access_token') || '',
-        },
-        body: JSON.stringify(data),
-    });
-    return response.json();
+    return await axios.post(POSTS_URL, data);
 };
 
 
