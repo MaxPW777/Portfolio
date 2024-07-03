@@ -6,4 +6,5 @@ export interface IUser {
     password: string;
     created_at: Date;
     updated_at: Date;
+    refresh_token?: string;
 }
