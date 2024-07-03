@@ -1,7 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {createContact, getContacts} from "@/services/contact/routes";
 
-export const useGetContacts = () => {
+export const useGetContactsQuery = () => {
     return useQuery('contacts', getContacts)
 }
 
