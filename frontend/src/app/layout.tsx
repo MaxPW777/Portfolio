@@ -3,6 +3,7 @@ import {Inter} from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Navbar from "@/components/Navbar";
+import {AuthProvider} from "@/providers/auth-context";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -16,12 +17,14 @@ export default function RootLayout({children}: Readonly<{
 }>) {
     return (
         <ReactQueryProvider>
-            <html lang="en">
-            <body className={inter.className}>
-            <Navbar/>
-            {children}
-            </body>
-            </html>
+            <AuthProvider>
+                <html lang="en">
+                <body className={inter.className}>
+                <Navbar/>
+                {children}
+                </body>
+                </html>
+            </AuthProvider>
         </ReactQueryProvider>
     );
 }
