@@ -1,5 +1,10 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
-import { createPost, editPost, getPosts } from '@/services/post/routes';
+import {
+    createPost,
+    deletePost,
+    editPost,
+    getPosts
+} from '@/services/post/routes';
 import { ICreatePostDto } from '@common/dto/ICreatePostDto';
 import { IEditPostDto } from '@common/dto/IEditPostDto';
 
@@ -21,3 +26,14 @@ export const useGetPostsQuery = () => {
 export const useEditPostMutation = () => {
     return useMutation(({ id, data }: { id: string; data: IEditPostDto }) => editPost(id, data));
 };
+
+// Mutation for deleting a post
+export const useDeletePostMutation = () => {
+    const queryClient = useQueryClient();
+    return useMutation((id: string) => deletePost(id), {
+        onSuccess: () => {
+            // Invalidate the posts query to refetch the data
+            queryClient.invalidateQueries('posts');
+        },
+    });
+}

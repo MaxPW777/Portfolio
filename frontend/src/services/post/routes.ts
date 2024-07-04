@@ -25,3 +25,7 @@ export const editPost = async (id: string, data: IEditPostDto) => {
     });
     return response.json();
 };
+
+export const deletePost = async (id: string) => {
+    return await axios.delete(`${POSTS_URL}/delete/${id}`);
+}
