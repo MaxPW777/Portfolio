@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {IPost} from "@common/types/IPost";
 import CommentArea from "@/components/blog/CommentArea";
 import DOMPurify from 'dompurify';
+import DeletePostButton from "@/components/blog/DeletePostButton";
 
 interface FocusedPostProps {
     post: IPost | null;
@@ -21,7 +22,9 @@ function FocusedPost({post}: FocusedPostProps) {
         <div
             className="w-full h-[calc(100% - 1rem)] p-4 border-l flex flex-col transition-all duration-500">
             <div
-                className={`border p-4 ${expandComments ? 'h-1/4' : 'h-3/4'} flex flex-col transition-all duration-500`}>
+                className={`relative border p-4 ${expandComments ? 'h-1/4' : 'h-3/4'} flex flex-col transition-all duration-500`}>
+                {/*// @ts-ignore type contains _id*/}
+                <DeletePostButton postId={post._id}/>
                 <h2 className="text-2xl font-bold">{post.title}</h2>
                 <p className="mt-2 h-fit overflow-x-auto"
                    dangerouslySetInnerHTML={{__html: sanitizedContent}}/>
