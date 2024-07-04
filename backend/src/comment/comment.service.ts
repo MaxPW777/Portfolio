@@ -3,6 +3,7 @@ import {ICommentDocument} from "@/comment/interfaces/comment.interface";
 import {Model} from "mongoose";
 import {InjectModel} from "@nestjs/mongoose";
 import {Comment} from "@/comment/schemas/comment.schema";
+import {DeleteResult} from "mongodb";
 
 @Injectable()
 export class CommentService {
@@ -18,4 +19,7 @@ export class CommentService {
         return createdComment.save();
     }
 
+    async deleteCommentsByPost(postID: string): Promise<DeleteResult> {
+        return this.commentModel.deleteMany({postID}).exec();
+    }
 }

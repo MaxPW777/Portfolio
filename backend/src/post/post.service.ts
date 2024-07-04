@@ -27,4 +27,10 @@ export class PostService {
             _id: postID
         }, post, {new: true}).exec();
     }
+
+    async delete(postID: string): Promise<IPostDocument> {
+        return await this.postModel.findOneAndDelete({
+            _id: postID
+        }).exec();
+    }
 }
