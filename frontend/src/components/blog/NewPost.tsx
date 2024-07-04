@@ -48,7 +48,7 @@ const NewPost: React.FC = () => {
             {showMenu && (
                 <form
                     onSubmit={submitPost}
-                    className="absolute top-16 right-1 bg-white p-4 rounded-lg shadow-md"
+                    className="absolute z-10 top-16 right-1 bg-white p-4 rounded-lg shadow-md"
                 >
                     <input
                         type="text"
