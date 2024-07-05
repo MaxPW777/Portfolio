@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import PostList from '@/components/blog/PostList';
+import PostList from '@/components/blog/postList/PostList';
 import FocusedPost from '@/components/blog/FocusedPost';
 import { useGetPostsQuery } from "@/services/post";
 import { IPost } from "@common/types/IPost";

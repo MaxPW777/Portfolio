@@ -1,7 +1,7 @@
 "use client"
 import React, {useState} from 'react';
 import {IPost} from "@common/types/IPost";
-import CommentArea from "@/components/blog/CommentArea";
+import CommentArea from "@/components/blog/comments/CommentArea";
 import DOMPurify from 'dompurify';
 import DeletePostButton from "@/components/blog/DeletePostButton";
 
