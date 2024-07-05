@@ -1,35 +1,32 @@
 "use client"
 import {useGetContactsQuery} from "@/services/contact";
 import {IContactRequest} from "@common/types/IContactRequest";
-import {useEffect, useState} from "react";
+import {useAuth} from "@/providers/auth-context";
 
 function ContactList() {
-    const [isLogged, setIsLogged] = useState(false);
+    const {isAuthenticated} = useAuth()
     const {data, isLoading} = useGetContactsQuery();
-
-    useEffect(() => {
-        const token = localStorage.getItem('access_token');
-        setIsLogged(token !== null);
-    }, []);
 
     if (isLoading) {
         return <div>Loading...</div>
     }
 
-    if (!isLogged) {
+    if (!isAuthenticated) {
         return
     }
 
     return (
-        <ul>
-            {data && data.map((contact: IContactRequest, index: number) => (
-                <li key={index}>
-                    <div>{contact.name}</div>
-                    <div>{contact.email}</div>
-                    <div>{contact.message}</div>
-                </li>
-            ))}
-        </ul>
+        <div className={'border rounded p-2'}>
+            <ul>
+                {data && data.map((contact: IContactRequest, index: number) => (
+                    <li key={index}>
+                        <div>{contact.name}</div>
+                        <div>{contact.email}</div>
+                        <div>{contact.message}</div>
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
 
