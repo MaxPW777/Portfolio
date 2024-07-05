@@ -1,11 +1,10 @@
 import {IComment} from "@common/types/IComment";
-import {useState} from "react";
 
 interface CommentListProps {
     comments: IComment[];
 }
 
-function CommentList({comments}: CommentListProps){
+function CommentList({comments}: CommentListProps) {
     return (
         <div className={'flex flex-col'}>
             {comments && comments.map((comment) => (

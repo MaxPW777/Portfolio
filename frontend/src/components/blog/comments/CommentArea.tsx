@@ -1,6 +1,6 @@
 "use client"
-import CommentList from "@/components/blog/CommentList";
-import CommentForm from "@/components/blog/CommentForm";
+import CommentList from "@/components/blog/comments/CommentList";
+import CommentForm from "@/components/blog/comments/CommentForm";
 import React, { useState } from "react";
 import { useGetCommentsQuery } from "@/services/comment";
 

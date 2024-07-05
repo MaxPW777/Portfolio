@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 import MediumPost from './MediumPost';
 import { IPost } from "@common/types/IPost";
