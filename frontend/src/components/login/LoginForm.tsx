@@ -29,9 +29,9 @@ function LoginForm() {
 
     return (
         <div
-            className="abs-center flex flex-col items-center justify-center text-black bg-[rgba(0,0,0,0.5)] rounded">
+            className="abs-center flex flex-col items-center justify-center text-primary bg-[rgba(0,0,0,0.2)] rounded">
             <form onSubmit={handleSubmit(onSubmit)}
-                  className="flex flex-col gap-4 mx-auto p-6 text-white rounded-lg">
+                  className="flex flex-col gap-4 mx-auto p-6 rounded-lg">
                 <h2 className="text-xl mb-4">Login</h2>
                 {errors.username && <span>Please enter your username</span>}
                 <label className="flex flex-col text-sm">
