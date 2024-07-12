@@ -9,9 +9,7 @@ function ContactPage() {
                 <div className={'border rounded p-2'}>
                     <ContactForm/>
                 </div>
-                <div className={'border rounded p-2'}>
-                    <ContactList/>
-                </div>
+                <ContactList/>
             </div>
         </div>
     );
