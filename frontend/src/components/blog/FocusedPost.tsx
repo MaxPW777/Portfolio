@@ -20,7 +20,7 @@ function FocusedPost({post}: FocusedPostProps) {
 
     return (
         <div
-            className="w-full h-[calc(100% - 1rem)] p-4 border-l flex flex-col transition-all duration-500">
+            className="w-full h-[calc(100% - 1rem)] p-4 border-l flex flex-col transition-all overflow-y-auto duration-500">
             <div
                 className={`relative border p-4 ${expandComments ? 'h-1/4' : 'h-3/4'} flex flex-col transition-all duration-500`}>
                 {/*// @ts-ignore type contains _id*/}

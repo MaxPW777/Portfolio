@@ -11,7 +11,8 @@ export class CommentService {
     }
 
     async getForPost(postID: string): Promise<ICommentDocument[]> {
-        return this.commentModel.find({postID}).exec();
+        // Sorting comments by creation date in descending order (newest first)
+        return this.commentModel.find({postID}).sort({createdAt: -1}).exec();
     }
 
     async create(comment: ICommentDocument): Promise<ICommentDocument> {

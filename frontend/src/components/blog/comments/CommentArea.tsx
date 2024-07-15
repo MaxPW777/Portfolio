@@ -26,7 +26,7 @@ function CommentArea({ postId, onToggleExpand }: CommentAreaProps) {
                     {showComments ? 'Hide comments' : 'See all comments'}
                 </button>
             </div>
-            <CommentForm postId={postId} />
+            <CommentForm postID={postId} />
             {showComments && <CommentList comments={query.data} />}
         </div>
     );
