@@ -13,7 +13,7 @@ import { useLoginMutation } from '@/services/user';
 
 export interface AuthContextType {
     isAuthenticated: boolean;
-    user: any;
+    user: { userID: string};
     login: ({ username, password }: { username: string; password: string }) => Promise<void>;
     logout: () => void;
     loading: boolean;
