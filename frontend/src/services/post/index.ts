@@ -5,15 +5,17 @@ import {
     editPost,
     getPosts
 } from '@/services/post/routes';
-import { ICreatePostDto } from '@common/dto/ICreatePostDto';
-import { IEditPostDto } from '@common/dto/IEditPostDto';
+import {ICreatePostDto} from '@common/dto/ICreatePostDto';
+import {IEditPostDto} from '@common/dto/IEditPostDto';
 
 // Mutation for creating a post
 export const useCreatePostMutation = () => {
     const queryClient = useQueryClient()
-    return useMutation((data: ICreatePostDto) => createPost(data), {onSuccess: () => {
-        // Invalidate the posts query to refetch the data
-            queryClient.invalidateQueries('posts');}
+    return useMutation((data: ICreatePostDto) => createPost(data), {
+        onSuccess: () => {
+            // Invalidate the posts query to refetch the data
+            queryClient.invalidateQueries('posts');
+        }
     });
 };
 
@@ -24,7 +26,10 @@ export const useGetPostsQuery = () => {
 
 // Mutation for editing a post
 export const useEditPostMutation = () => {
-    return useMutation(({ id, data }: { id: string; data: IEditPostDto }) => editPost(id, data));
+    return useMutation(({id, data}: {
+        id: string;
+        data: IEditPostDto
+    }) => editPost(id, data));
 };
 
 // Mutation for deleting a post

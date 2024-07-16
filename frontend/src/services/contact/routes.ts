@@ -4,7 +4,7 @@ import {IContactRequest} from "@common/types/IContactRequest";
 
 const CONTACT_URL = `${API_URL}/contact`;
 
-export const getContacts = async () : Promise<IContactRequest[]> => {
+export const getContacts = async (): Promise<IContactRequest[]> => {
     const response = await fetch(CONTACT_URL, {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('access_token') || '',
@@ -13,7 +13,7 @@ export const getContacts = async () : Promise<IContactRequest[]> => {
     return response.json();
 };
 
-export const createContact = async (data : IContactRequestDto) => {
+export const createContact = async (data: IContactRequestDto) => {
     const response = await fetch(CONTACT_URL, {
         method: 'POST',
         headers: {

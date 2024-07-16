@@ -1,6 +1,6 @@
-import { ICreatePostDto } from '@common/dto/ICreatePostDto';
-import { IEditPostDto } from '@common/dto/IEditPostDto';
-import { API_URL } from '@common/utils/constants';
+import {ICreatePostDto} from '@common/dto/ICreatePostDto';
+import {IEditPostDto} from '@common/dto/IEditPostDto';
+import {API_URL} from '@common/utils/constants';
 import axios from '@/providers/axios';
 
 const POSTS_URL = `${API_URL}/post`;

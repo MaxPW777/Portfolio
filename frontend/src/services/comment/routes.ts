@@ -8,7 +8,7 @@ export const getCommentsForPost = async (postId: string) => {
     return response.json();
 };
 
-export const createComment = async (data : ICreateComentDto) => {
+export const createComment = async (data: ICreateComentDto) => {
     const response = await fetch(COMMENT_API, {
         method: "POST",
         headers: {
