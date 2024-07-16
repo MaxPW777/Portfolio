@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString } from '@nestjs/class-validator';
-import {ICreatePostDto} from "@common/dto/ICreatePostDto";
+import { ICreatePostDto } from "@common/dto/ICreatePostDto";
 
-export class CreatePostDto implements ICreatePostDto{
+export class CreatePostDto implements ICreatePostDto {
     @IsNotEmpty()
     @IsString()
     title: string;
@@ -9,4 +9,7 @@ export class CreatePostDto implements ICreatePostDto{
     @IsNotEmpty()
     @IsString()
     content: string;
+
+    // image will be handled separately by Multer
+    image?: string;
 }

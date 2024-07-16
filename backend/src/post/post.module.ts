@@ -4,6 +4,7 @@ import {PostService} from "@/post/post.service";
 import {MongooseModule} from "@nestjs/mongoose";
 import {Post, PostSchema} from "@/post/schemas/post.schema";
 import {CommentModule} from "@/comment/comment.module";
+import {S3Service} from "@/s3/s3.service";
 
 @Module({
     imports: [MongooseModule.forFeature([{
@@ -11,7 +12,7 @@ import {CommentModule} from "@/comment/comment.module";
         schema: PostSchema
     }]), CommentModule],
     controllers: [PostController],
-    providers: [PostService],
+    providers: [PostService, S3Service],
     exports: [PostService]
 })
 export class PostModule {

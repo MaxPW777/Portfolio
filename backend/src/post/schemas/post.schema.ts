@@ -10,6 +10,8 @@ export class Post extends Document implements IPostDocument {
     content: string;
     @Prop({ type: Types.ObjectId, ref: 'User', required: true })
     author: string;
+    @Prop()
+    image: string;
     @Prop({default: Date.now})
     created_at: Date;
     @Prop({default: Date.now})
