@@ -18,8 +18,9 @@ function ContactForm() {
     };
 
     return (
-        <form className={'contact'} onSubmit={handleSubmit(onSubmit)}>
+        <form className={'contact flex flex-col justify-between'} onSubmit={handleSubmit(onSubmit)}>
             <h2 className="text-xl mb-4">Contact Me</h2>
+            <div>
             <label className={'contact-label'}>Name
                 <input className={'contact-input'} type="text"
                        placeholder="Name" {...register('name', {required: true})}/>
@@ -39,6 +40,7 @@ function ContactForm() {
                     placeholder="Message" {...register('message', {required: true})}/>
                 {errors.message && <span>Message is required</span>}
             </label>
+            </div>
             <button
                 className={'bg-blue-500 text-white rounded-lg p-2 hover:bg-blue-700'}
                 type="submit">Submit

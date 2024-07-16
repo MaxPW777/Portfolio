@@ -7,7 +7,7 @@ function ContactList() {
     const {isAuthenticated} = useAuth()
     const {data, isLoading} = useGetContactsQuery();
 
-    if (isLoading) {
+    if (isAuthenticated && isLoading) {
         return <div>Loading...</div>
     }
 
@@ -16,13 +16,15 @@ function ContactList() {
     }
 
     return (
-        <div className={'border rounded p-2'}>
-            <ul>
+        <div className={'contact overflow-y-auto w-[600px]'}>
+            <ul className={'flex flex-col gap-y-2.5'}>
                 {data && data.map((contact: IContactRequest, index: number) => (
-                    <li key={index}>
-                        <div>{contact.name}</div>
-                        <div>{contact.email}</div>
-                        <div>{contact.message}</div>
+                    <li className={'border rounded p-3 flex flex-col gap-y-2.5'} key={index}>
+                        <div className={'flex justify-between'}>
+                        <p>{contact.name}</p>
+                        <p>{contact.email}</p>
+                        </div>
+                        <p>{contact.message}</p>
                     </li>
                 ))}
             </ul>
