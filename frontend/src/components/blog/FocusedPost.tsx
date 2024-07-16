@@ -4,6 +4,7 @@ import {IPost} from "@common/types/IPost";
 import CommentArea from "@/components/blog/comments/CommentArea";
 import DOMPurify from 'dompurify';
 import DeletePostButton from "@/components/blog/DeletePostButton";
+import Image from "next/image";
 
 interface FocusedPostProps {
     post: IPost | null;
@@ -26,6 +27,8 @@ function FocusedPost({post}: FocusedPostProps) {
                 {/*// @ts-ignore type contains _id*/}
                 <DeletePostButton postId={post._id}/>
                 <h2 className="text-2xl font-bold">{post.title}</h2>
+                {post.image && <Image src={post.image} alt={post.title}
+                      className="w-full h-1/2 object-cover" width={'500'} height={'400'}/>}
                 <p className="mt-2 h-fit overflow-x-auto"
                    dangerouslySetInnerHTML={{__html: sanitizedContent}}/>
             </div>

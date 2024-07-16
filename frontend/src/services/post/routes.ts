@@ -10,10 +10,21 @@ export const getPosts = async () => {
     return response.json();
 };
 
-export const createPost = async (data: ICreatePostDto) => {
-    return await axios.post(POSTS_URL, data);
-};
+export const createPost = async (postDto: ICreatePostDto) => {
+    const formData = new FormData();
+    formData.append('title', postDto.title);
+    formData.append('content', postDto.content);
+    if (postDto.image) {
+        formData.append('image', postDto.image);
+    }
 
+    const response = await axios.post(POSTS_URL, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    return response.data;
+};
 
 export const editPost = async (id: string, data: IEditPostDto) => {
     const response = await fetch(`${POSTS_URL}/edit/${id}`, {
