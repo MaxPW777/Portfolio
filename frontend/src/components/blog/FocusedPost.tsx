@@ -27,8 +27,10 @@ function FocusedPost({post}: FocusedPostProps) {
                 {/*// @ts-ignore type contains _id*/}
                 <DeletePostButton postId={post._id}/>
                 <h2 className="text-2xl font-bold">{post.title}</h2>
-                {post.image && <Image src={post.image} alt={post.title}
-                      className="w-full h-1/2 object-cover" width={'500'} height={'400'}/>}
+                {post.image && <div className={'relative w-auto h-auto'}>
+                    <Image src={post.image} alt={post.title} fill={true}/>
+                </div>
+                }
                 <p className="mt-2 h-fit overflow-x-auto"
                    dangerouslySetInnerHTML={{__html: sanitizedContent}}/>
             </div>
