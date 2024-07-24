@@ -16,7 +16,6 @@ function BlogPage() {
     }
 
     return (
-        <>
             <SelectedPostProvider>
                 {isAuthenticated && <NewPost/>}
                 <div className="h-[calc(100vh-4rem)] mt-16">
@@ -26,7 +25,6 @@ function BlogPage() {
                     </div>
                 </div>
             </SelectedPostProvider>
-        </>
     );
 }
 

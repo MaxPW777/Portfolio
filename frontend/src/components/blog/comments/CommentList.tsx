@@ -1,16 +1,19 @@
-import { IComment } from "@common/types/IComment";
+import {IComment} from "@common/types/IComment";
+import {ScrollArea} from "@/components/ui/scroll-area";
+import {Card} from "@/components/ui/card";
 
 interface CommentListProps {
     comments: IComment[];
 }
 
-function CommentList({ comments }: CommentListProps) {
+function CommentList({comments}: CommentListProps) {
     return (
-        <div className="flex flex-col py-10 gap-y-4">
+        <ScrollArea className="flex flex-col py-10 gap-y-4">
             {comments && comments.map((comment) => (
                 // @ts-ignore
-                <div key={comment._id} className="p-2 border rounded flex gap-2 justify-between items-center">
-                    <div className="flex flex-col">
+                <Card key={comment._id}
+                      className="flex gap-2 justify-between items-center p-4">
+                    <div className="flex flex-col gap-y-2">
                         <p>@{comment.author}</p>
                         <p>{comment.content}</p>
                     </div>
@@ -18,9 +21,9 @@ function CommentList({ comments }: CommentListProps) {
                         <p>Written on:</p>
                         <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
                     </div>
-                </div>
+                </Card>
             ))}
-        </div>
+        </ScrollArea>
     );
 }
 
