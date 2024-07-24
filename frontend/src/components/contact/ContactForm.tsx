@@ -1,52 +1,96 @@
-"use client"
-import {useForm} from "react-hook-form";
-import {IContactRequestDto} from "@common/dto/IContactRequestDto";
-import {useCreateContactMutation} from "@/services/contact";
-import './contact-form.css';
+"use client";
+import { useForm } from "react-hook-form";
+import { useCreateContactMutation } from "@/services/contact";
+import {
+    Form,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormControl,
+    FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { IContactRequestDto } from "@common/dto/IContactRequestDto";
 
-function ContactForm() {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export function ContactForm() {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const mutation = useCreateContactMutation();
-    const {
-        register,
-        handleSubmit,
-        formState: {errors}
-    } = useForm<IContactRequestDto>();
+
+    const form = useForm({
+        defaultValues: {
+            name: "",
+            email: "",
+            message: ""
+        }
+    });
 
     const onSubmit = (data: IContactRequestDto) => {
         mutation.mutate(data);
+        form.reset();
     };
 
     return (
-        <form className={'contact flex flex-col justify-between'} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className="text-xl mb-4">Contact Me</h2>
-            <div>
-            <label className={'contact-label'}>Name
-                <input className={'contact-input'} type="text"
-                       placeholder="Name" {...register('name', {required: true})}/>
-                {errors.name && <span>Name is required</span>}
-            </label>
-            <label className={'contact-label'}>Email
-                <input className={'contact-input'} type="email"
-                       placeholder="Email" {...register('email', {
-                    required: true,
-                    pattern: emailRegex
-                })}/>
-                {errors.email && <span>Please enter a valid email address</span>}
-            </label>
-            <label className={'contact-label'}>Message
-                <textarea
-                    className={'w-full border border-gray-300 rounded-lg p-2'}
-                    placeholder="Message" {...register('message', {required: true})}/>
-                {errors.message && <span>Message is required</span>}
-            </label>
-            </div>
-            <button
-                className={'bg-blue-500 text-white rounded-lg p-2 hover:bg-blue-700'}
-                type="submit">Submit
-            </button>
-        </form>
-    )
+        <Card className="shadow-lg p-4 h-fit">
+            <CardHeader>
+                <CardTitle>Contact Me</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <Form {...form}>
+                    <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+                    <FormField
+                        control={form.control}
+                        name="name"
+                        rules={{ required: "Name is required" }}
+                        render={({ field, fieldState }) => (
+                            <FormItem>
+                                <FormLabel>Name</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Name" {...field} />
+                                </FormControl>
+                                {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        rules={{
+                            required: "Email is required",
+                            pattern: { value: emailRegex, message: "Please enter a valid email address" }
+                        }}
+                        render={({ field, fieldState }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Email" {...field} />
+                                </FormControl>
+                                {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="message"
+                        rules={{ required: "Message is required" }}
+                        render={({ field, fieldState }) => (
+                            <FormItem>
+                                <FormLabel>Message</FormLabel>
+                                <FormControl>
+                                    <Textarea placeholder="Message" {...field} />
+                                </FormControl>
+                                {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit" className="w-full mt-4">Submit</Button>
+                    </form>
+                </Form>
+            </CardContent>
+        </Card>
+    );
 }
 
 export default ContactForm;

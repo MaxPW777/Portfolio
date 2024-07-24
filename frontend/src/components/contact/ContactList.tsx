@@ -16,7 +16,7 @@ function ContactList() {
     }
 
     return (
-        <div className={'contact overflow-y-auto w-[600px]'}>
+        <div className={'contact overflow-y-auto h-[600px] w-[600px] p-4'}>
             <ul className={'flex flex-col gap-y-2.5'}>
                 {data && data.map((contact: IContactRequest, index: number) => (
                     <li className={'border rounded p-3 flex flex-col gap-y-2.5'} key={index}>
@@ -24,7 +24,7 @@ function ContactList() {
                         <p>{contact.name}</p>
                         <p>{contact.email}</p>
                         </div>
-                        <p>{contact.message}</p>
+                        <p className={'w-full'}>{contact.message}</p>
                     </li>
                 ))}
             </ul>
