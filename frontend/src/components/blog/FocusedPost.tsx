@@ -5,19 +5,18 @@ import CommentArea from "@/components/blog/comments/CommentArea";
 import DOMPurify from 'dompurify';
 import DeletePostButton from "@/components/blog/DeletePostButton";
 import Image from "next/image";
+import {useSelectedPost} from "@/providers/SelectedPostProvider";
 
-interface FocusedPostProps {
-    post: IPost | null;
-}
 
-function FocusedPost({post}: FocusedPostProps) {
+function FocusedPost() {
     const [expandComments, setExpandComments] = useState(false);
+    const {selectedPost} = useSelectedPost();
 
-    if (!post) {
+    if (!selectedPost) {
         return <div className="w-1/2 p-4">Select a post to read</div>;
     }
 
-    const sanitizedContent = DOMPurify.sanitize(post.content.replace(/\n/g, '<br />'));
+    const sanitizedContent = DOMPurify.sanitize(selectedPost.content.replace(/\n/g, '<br />'));
 
     return (
         <div
@@ -25,10 +24,10 @@ function FocusedPost({post}: FocusedPostProps) {
             <div
                 className={`relative border p-4 ${expandComments ? 'h-1/4' : 'h-3/4'} flex flex-col transition-all duration-500`}>
                 {/*// @ts-ignore type contains _id*/}
-                <DeletePostButton postId={post._id}/>
-                <h2 className="text-2xl font-bold">{post.title}</h2>
-                {post.image && <div className={'relative w-auto h-auto'}>
-                    <Image src={post.image} alt={post.title} fill={true}/>
+                <DeletePostButton postId={selectedPost._id}/>
+                <h2 className="text-2xl font-bold">{selectedPost.title}</h2>
+                {selectedPost.image && <div className={'relative w-auto h-auto'}>
+                    <Image src={selectedPost.image} alt={selectedPost.title} fill={true}/>
                 </div>
                 }
                 <p className="mt-2 h-fit overflow-x-auto"
@@ -37,7 +36,7 @@ function FocusedPost({post}: FocusedPostProps) {
             <div
                 className={`mt-4 flex gap-3 ${expandComments ? 'h-3/4' : 'h-1/4'} transition-all duration-500`}>
                 {/*@ts-ignore*/}
-                <CommentArea postId={post._id}
+                <CommentArea postId={selectedPost._id}
                              onToggleExpand={setExpandComments}/>
             </div>
         </div>

@@ -1,14 +1,22 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useSelectedPost } from "@/providers/SelectedPostProvider";
+import { IPost } from "@common/types/IPost";
+
 interface MediumPostProps {
-    title: string;
-    content: string;
+    post: IPost;
 }
 
-const MediumPost: React.FC<MediumPostProps> = ({ title, content } : MediumPostProps) => {
+const MediumPost: React.FC<MediumPostProps> = ({ post }) => {
+    const { setSelectedPost } = useSelectedPost();
     return (
-        <div className="border p-3 rounded-xl">
-            <h3 className="text-xl font-semibold">{title}</h3>
-            <p className="mt-2 text-sm text-gray-600 line-clamp-3 ">{content}</p>
-        </div>
+        <Card onClick={() => setSelectedPost(post)} className="cursor-pointer mb-4">
+            <CardHeader>
+                <CardTitle>{post.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p className="line-clamp-3">{post.content}</p>
+            </CardContent>
+        </Card>
     );
 };
 
