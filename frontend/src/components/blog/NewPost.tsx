@@ -1,81 +1,96 @@
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useCreatePostMutation } from '@/services/post';
 import { ICreatePostDto } from '@common/dto/ICreatePostDto';
-
-interface IFormInput {
-    title: string;
-    content: string;
-    image: string;
-}
+import { Button } from "@/components/ui/button";
+import {
+    Dialog, DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
+} from "@/components/ui/form";
+import { Input } from '../ui/input';
+import {Textarea} from "@/components/ui/textarea";
 
 const NewPost: React.FC = () => {
-    const [showMenu, setShowMenu] = useState(false);
-    const createPost = useCreatePostMutation();
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormInput>();
+    const form = useForm<ICreatePostDto>({ defaultValues: {} as ICreatePostDto });
+    const mutation = useCreatePostMutation();
 
-    const toggleMenu = () => setShowMenu(!showMenu);
+    const onSubmit = async (data: ICreatePostDto) => {
+        // Convert image field to File if it's not already
+        const imageFile = data.image instanceof FileList ? data.image[0] : data.image;
+        const postData : ICreatePostDto = { ...data, image: imageFile };
 
-    const onSubmit: SubmitHandler<IFormInput> = (data) => {
-        const postDto: ICreatePostDto = {
-            title: data.title,
-            content: data.content,
-            image: data.image[0], // Assuming the first file is the one to upload
-        };
 
-        createPost.mutate(postDto, {
-            onSuccess: () => {
-                toggleMenu();
-                reset();
-            },
-            onError: (error: any) => {
-                console.error('Error creating post:', error);
-            }
-        });
-    };
+        try {
+            await mutation.mutateAsync(postData);
+            form.reset();
+        } catch (error) {
+            console.error('Failed to create post', error);
+        }
+    }
 
     return (
-        <>
-            <div className={'absolute right-1 top-1 flex'}>
-                <button
-                    onClick={toggleMenu}
-                    className="rounded-2xl bg-blue-500 p-3 text-white"
-                >
-                    + New Post
-                </button>
-            </div>
-            {showMenu && (
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="absolute z-10 top-16 right-1 bg-white p-4 rounded-lg shadow-md"
-                >
-                    <input
-                        type="text"
-                        placeholder="Title"
-                        className="w-full p-2 border rounded mb-4"
-                        {...register('title', { required: true })}
-                    />
-                    {errors.title && <span className="text-red-500">This field is required</span>}
-
-                    <input
-                        type="file"
-                        className="w-full p-2 border rounded mb-4"
-                        {...register('image', { required: false })}
-                    />
-
-                    <textarea
-                        placeholder="Content"
-                        className="w-full p-2 border rounded mb-4"
-                        {...register('content', { required: true })}
-                    />
-                    {errors.content && <span className="text-red-500">This field is required</span>}
-
-                    <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                        Post
-                    </button>
-                </form>
-            )}
-        </>
+        <Dialog>
+            <DialogTrigger asChild>
+                <Button className='absolute right-5 top-5 z-30'>+ New Post</Button>
+            </DialogTrigger>
+            <DialogContent className={'min-w-[600px]'}>
+                <DialogHeader>
+                    <DialogTitle>Add a New Post</DialogTitle>
+                    <DialogDescription>Use this form to add a new post to the database</DialogDescription>
+                </DialogHeader>
+                <Form {...form} >
+                    <form className={'gap-y-2.5 flex flex-col'} onSubmit={form.handleSubmit(onSubmit)}>
+                        <FormField control={form.control} rules={{ required: "title is required" }} name="title"
+                                   render={({ field, fieldState }) => (
+                                       <FormItem>
+                                           <FormLabel>Title</FormLabel>
+                                           <FormControl>
+                                               <Input placeholder='Really cool title' {...field} />
+                                           </FormControl>
+                                           <FormMessage>
+                                               {fieldState.error?.message}
+                                           </FormMessage>
+                                       </FormItem>
+                                   )} />
+                        <FormField control={form.control} rules={{ required: "content is required" }} name="content"
+                                   render={({ field, fieldState }) => (
+                                       <FormItem>
+                                           <FormLabel>Content</FormLabel>
+                                           <FormControl>
+                                               <Textarea className={'h-[400px]'} placeholder='Lorem Ipsum Content' {...field} />
+                                           </FormControl>
+                                           <FormMessage>
+                                               {fieldState.error?.message}
+                                           </FormMessage>
+                                       </FormItem>
+                                   )} />
+                        <FormField control={form.control} name="image"
+                                   render={({ field }) => (
+                                       <FormItem>
+                                           <FormLabel>Image (not required) </FormLabel>
+                                           <FormControl>
+                                               <Input type='file' onChange={(e) => field.onChange(e.target.files?.[0])} />
+                                           </FormControl>
+                                       </FormItem>
+                                   )} />
+                        <DialogClose asChild>
+                            <Button type='submit'>Submit</Button>
+                        </DialogClose>
+                    </form>
+                </Form>
+            </DialogContent>
+        </Dialog>
     );
 };
 
