@@ -11,5 +11,5 @@ export class CreatePostDto implements ICreatePostDto {
     content: string;
 
     // image will be handled separately by Multer
-    image?: string;
+    image?: File;
 }
