@@ -1,6 +1,7 @@
 import {useCreateCommentMutation} from '@/services/comment';
-import {FormProvider, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {
+    Form,
     FormControl,
     FormField,
     FormItem,
@@ -20,7 +21,7 @@ type commentForm = {
 
 function CommentForm({postID}: CommentFormProps) {
     const createCommentMutation = useCreateCommentMutation();
-    const formMethods = useForm<commentForm>();
+    const form = useForm<commentForm>();
 
     const onSubmit = async (data: commentForm) => {
         try {
@@ -28,19 +29,19 @@ function CommentForm({postID}: CommentFormProps) {
                 postID,
                 ...data
             });
-            formMethods.reset();
+            form.reset();
         } catch (error) {
             console.error('Failed to create comment', error);
         }
     }
 
     return (
-        <FormProvider {...formMethods}>
-            <form onSubmit={formMethods.handleSubmit(onSubmit)}
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}
                   className="mt-2 w-full flex flex-col gap-4">
                 <div
                     className="flex flex-row justify-between items-center gap-x-10">
-                    <FormField control={formMethods.control} name="author"
+                    <FormField control={form.control} name="author"
                                rules={{required: "Author is Required"}} render={
                         ({field}) => (
                             <Input type="text" placeholder="Name" {...field}
@@ -49,7 +50,7 @@ function CommentForm({postID}: CommentFormProps) {
                     <Button type="submit"
                             className='w-1/3 min-w-24'>Submit</Button>
                 </div>
-                <FormField control={formMethods.control} name="content"
+                <FormField control={form.control} name="content"
                            rules={{required: "Content is Required"}} render={
                     ({field, fieldState}) => (
                         <FormItem>
@@ -62,7 +63,7 @@ function CommentForm({postID}: CommentFormProps) {
                         </FormItem>
                     )}/>
             </form>
-        </FormProvider>
+        </Form>
     );
 }
 
