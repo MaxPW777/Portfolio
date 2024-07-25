@@ -31,10 +31,17 @@ function FocusedPost() {
                     className="text-2xl font-bold">{selectedPost.title}</CardHeader>
                 <CardContent className={'overflow-y-auto mt-2'}>
                     {selectedPost.image &&
-                        <div className={'relative w-auto h-auto'}>
-                            <Image src={selectedPost.image}
-                                   alt={selectedPost.title}
-                                   fill={true}/>
+                        <div className="relative h-auto w-full max-w-[600px]">
+                            <div
+                                className="relative pb-[75%]"> {/* Maintain aspect ratio */}
+                                <Image
+                                    src={selectedPost.image}
+                                    alt={selectedPost.title}
+                                    fill
+                                    sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    style={{objectFit: 'contain'}} // Preserve image resolution and aspect ratio
+                                />
+                            </div>
                         </div>
                     }
                     <p className="mt-2 h-fit"
