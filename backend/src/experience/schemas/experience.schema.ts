@@ -5,17 +5,15 @@ import {Document} from "mongoose";
 @Schema()
 export class Experience extends Document implements IExperienceDocument {
     @Prop({required : true})
-    title: string;
-    @Prop({required : true})
     description: string;
     @Prop({required : true})
     company: string;
-    @Prop()
+    @Prop({required : true})
     image: string;
     @Prop()
-    endDate: Date;
-    @Prop()
     startDate: Date;
+    @Prop()
+    endDate: Date;
 }
 
 export const ExperienceSchema = SchemaFactory.createForClass(Experience);
