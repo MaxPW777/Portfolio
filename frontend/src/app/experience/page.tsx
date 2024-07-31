@@ -1,8 +1,10 @@
+import ExperienceList from "@/components/experience/ExperienceList";
+
 function Page() {
     return (
-        <div>
-        <h1>Experiences</h1>
-        </div>
+        <main className={'abs-center'}>
+            <ExperienceList/>
+        </main>
     );
 }
 

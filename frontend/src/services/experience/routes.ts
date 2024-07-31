@@ -1,12 +1,13 @@
 import {API_URL} from "@common/utils/constants";
 import axios from "@/providers/axios";
 import {ICreateExperienceDto} from "@common/dto/ICreateExperienceDto";
+import {IExperience} from "@common/types/IExperience";
 
 const EXPERIENCE_URL = `${API_URL}/experience`
 
-export const getExperiences = async () => axios.get(EXPERIENCE_URL)
+export const getExperiences = async () : Promise<IExperience[]> => axios.get(EXPERIENCE_URL)
 
-export const addExperience = async (experience: ICreateExperienceDto) => {
+export const addExperience = async (experience: ICreateExperienceDto) : Promise<IExperience> => {
     const formData = new FormData();
     formData.append('company', experience.company);
     formData.append('content', experience.description);
