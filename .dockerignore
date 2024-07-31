@@ -1,0 +1,40 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Build Output
+/.next/
+/out/
+/dist
+/build
+
+# Testing
+/coverage
+
+# Local Environment Files
+.env*.local
+
+# Miscellaneous
+.DS_Store
+*.pem
+.git
+.gitignore
+Dockerfile
+.dockerignore
+npm-debug.log
+README.md
+next-env.d.ts
+
+# Debug Files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Vercel Specific
+.vercel
+
+# Exceptions to include specific files from ignored directories
+!.next/static
+!.next/standalone
