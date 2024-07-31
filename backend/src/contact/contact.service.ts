@@ -3,7 +3,9 @@ import {InjectModel} from "@nestjs/mongoose";
 import {Contact} from "@/contact/schemas/contact.schema";
 import {IContactRequestDocument} from "@/contact/interfaces/contact.interface";
 import {Model} from "mongoose";
-import {IContactRequestDto} from "@common/dto/IContactRequestDto";
+import {
+    CreateContactRequestDto
+} from "@/contact/dto/create-contact-request.dto";
 
 @Injectable()
 export class ContactService {
@@ -14,7 +16,7 @@ export class ContactService {
         return this.contactModel.find().exec()
     }
 
-    async createContact(contactRequest: IContactRequestDto): Promise<IContactRequestDocument> {
+    async createContact(contactRequest: CreateContactRequestDto): Promise<IContactRequestDocument> {
         const createdContact = new this.contactModel(contactRequest);
         return createdContact.save();
     }

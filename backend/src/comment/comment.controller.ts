@@ -1,6 +1,7 @@
 import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {CommentService} from "@/comment/comment.service";
 import {ICommentDocument} from "@/comment/interfaces/comment.interface";
+import {CreateCommentDto} from "@/comment/dto/create-comment.dto";
 
 @Controller('comment')
 export class CommentController {
@@ -13,7 +14,7 @@ export class CommentController {
     }
 
     @Post()
-    async createComment(@Body() comment: ICommentDocument): Promise<ICommentDocument> {
+    async createComment(@Body() comment: CreateCommentDto): Promise<ICommentDocument> {
         return this.commentService.create(comment);
     }
 

@@ -1,7 +1,9 @@
 import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
 import {ContactService} from "@/contact/contact.service";
-import {IContactRequestDto} from "@common/dto/IContactRequestDto";
 import {JwtAuthGuard} from "@/auth/jwt-auth.guard";
+import {
+    CreateContactRequestDto
+} from "@/contact/dto/create-contact-request.dto";
 
 @Controller('contact')
 export class ContactController {
@@ -14,7 +16,7 @@ export class ContactController {
     }
 
     @Post()
-    createContact(@Body() contactRequest: IContactRequestDto) {
+    createContact(@Body() contactRequest: CreateContactRequestDto) {
         return this.contactService.createContact(contactRequest);
     }
 }

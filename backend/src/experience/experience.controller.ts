@@ -8,9 +8,9 @@ import {
     UseInterceptors
 } from "@nestjs/common";
 import {ExperienceService} from "@/experience/experience.service";
-import {ICreateExperienceDto} from "@common/dto/ICreateExperienceDto";
 import {JwtAuthGuard} from "@/auth/jwt-auth.guard";
 import {FileInterceptor} from "@nestjs/platform-express";
+import {CreateExperienceDto} from "@/experience/dto/create-experience.dto";
 
 @Controller('experience')
 export class ExperienceController {
@@ -25,7 +25,7 @@ export class ExperienceController {
     @UseGuards(JwtAuthGuard)
     @Post()
     @UseInterceptors(FileInterceptor('image'))
-    addExperience(@Body() experience: ICreateExperienceDto, @UploadedFile() file: Express.Multer.File) {
+    addExperience(@Body() experience: CreateExperienceDto, @UploadedFile() file: Express.Multer.File) {
         return this.experienceService.addExperience(experience, file);
     }
 }

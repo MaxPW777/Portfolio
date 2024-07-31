@@ -5,8 +5,8 @@ import {Model} from "mongoose";
 import {
     IExperienceDocument
 } from "@/experience/interfaces/experience.interface";
-import {ICreateExperienceDto} from "@common/dto/ICreateExperienceDto";
 import {S3Service} from "@/s3/s3.service";
+import {CreateExperienceDto} from "@/experience/dto/create-experience.dto";
 
 @Injectable()
 export class ExperienceService {
@@ -17,7 +17,7 @@ export class ExperienceService {
         return this.experienceModel.find().exec()
     }
 
-    async addExperience(experience : ICreateExperienceDto, file : Express.Multer.File): Promise<IExperienceDocument> {
+    async addExperience(experience : CreateExperienceDto, file : Express.Multer.File): Promise<IExperienceDocument> {
         let imageUrl : string;
         if (file) {
             const imageKey = await this.s3Service.uploadFile(file);

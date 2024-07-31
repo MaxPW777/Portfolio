@@ -4,6 +4,7 @@ import {Model} from "mongoose";
 import {InjectModel} from "@nestjs/mongoose";
 import {Comment} from "@/comment/schemas/comment.schema";
 import {DeleteResult} from "mongodb";
+import {CreateCommentDto} from "@/comment/dto/create-comment.dto";
 
 @Injectable()
 export class CommentService {
@@ -15,7 +16,7 @@ export class CommentService {
         return this.commentModel.find({postID}).sort({createdAt: -1}).exec();
     }
 
-    async create(comment: ICommentDocument): Promise<ICommentDocument> {
+    async create(comment: CreateCommentDto): Promise<ICommentDocument> {
         const createdComment = new this.commentModel(comment);
         return createdComment.save();
     }

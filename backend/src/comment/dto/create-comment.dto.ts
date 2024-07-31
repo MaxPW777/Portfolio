@@ -1,8 +1,7 @@
-import { IsNotEmpty, IsString } from '@nestjs/class-validator';
-import {ICreatePostDto} from "@common/dto/ICreatePostDto";
-import {ICreateComentDto} from "@common/dto/ICreateComentDto";
+import {IsNotEmpty, IsString} from '@nestjs/class-validator';
+import {ICreateCommentDto} from "@common/dto/ICreateCommentDto";
 
-export class CreatePostDto implements ICreateComentDto{
+export class CreateCommentDto implements ICreateCommentDto {
     @IsNotEmpty()
     @IsString()
     content: string;

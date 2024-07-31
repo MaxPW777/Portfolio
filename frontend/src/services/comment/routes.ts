@@ -1,5 +1,5 @@
 import {API_URL} from "@common/utils/constants";
-import {ICreateComentDto} from "@common/dto/ICreateComentDto";
+import {ICreateCommentDto} from "@common/dto/ICreateCommentDto";
 
 const COMMENT_API = API_URL + "/comment";
 
@@ -8,7 +8,7 @@ export const getCommentsForPost = async (postId: string) => {
     return response.json();
 };
 
-export const createComment = async (data: ICreateComentDto) => {
+export const createComment = async (data: ICreateCommentDto) => {
     const response = await fetch(COMMENT_API, {
         method: "POST",
         headers: {
