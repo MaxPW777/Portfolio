@@ -6,8 +6,7 @@ export class CreateExperienceDto implements ICreateExperienceDto {
     company: string;
     @IsString()
     description: string;
-    @IsString()
-    image: string;
+    image: File;
     @IsDate()
     startDate: Date;
     @IsDate()
