@@ -6,7 +6,7 @@ export const useExperienceQuery = () => {
     return useQuery(['experience'], getExperiences)
 }
 
-export const useCreateMutation = () => {
+export const useCreateExperienceMutation = () => {
     const queryClient = useQueryClient()
     return useMutation(
         (experience: ICreateExperienceDto) => addExperience(experience), {
