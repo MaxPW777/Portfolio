@@ -1,7 +1,7 @@
 export interface ICreateExperienceDto {
-    description : string;
     company : string;
-    image : string;
+    description : string;
+    image : File;
     startDate : Date;
     endDate? : Date;
 }
