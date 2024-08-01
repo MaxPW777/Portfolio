@@ -1,3 +1,4 @@
+"use client"
 import { useForm } from 'react-hook-form';
 import { useCreatePostMutation } from '@/services/post';
 import { ICreatePostDto } from '@common/dto/ICreatePostDto';
@@ -20,10 +21,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from '../ui/input';
 import {Textarea} from "@/components/ui/textarea";
+import {useAuth} from "@/providers/auth-context";
 
 const NewPost: React.FC = () => {
+    const {isAuthenticated} = useAuth()
     const form = useForm<ICreatePostDto>({ defaultValues: {} as ICreatePostDto });
     const mutation = useCreatePostMutation();
+
+    if (!isAuthenticated) return
 
     const onSubmit = async (data: ICreatePostDto) => {
         // Convert image field to File if it's not already

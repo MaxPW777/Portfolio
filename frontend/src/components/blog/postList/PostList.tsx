@@ -2,15 +2,23 @@ import React from 'react';
 import MediumPost from './MediumPost';
 import { IPost } from "@common/types/IPost";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {useGetPostsQuery} from "@/services/post";
 
-interface PostListProps {
-    posts: IPost[] | null;
-}
 
-function PostList({ posts }: PostListProps) {
+function PostList() {
+    const query = useGetPostsQuery()
+    if (query.isLoading){
+        return <p>Loading...</p>
+    }
+
+
+    if (query.isError){
+        return <p>ERROR FETCHING DATA</p>
+    }
+
     return (
         <ScrollArea className={'w-1/3 p-4 '}>
-            {posts && posts.map((post: IPost, index: number) => (
+            {query.data && query.data.map((post: IPost, index: number) => (
                 <div key={index} className="cursor-pointer mb-4">
                     <MediumPost post={post}/>
                 </div>
