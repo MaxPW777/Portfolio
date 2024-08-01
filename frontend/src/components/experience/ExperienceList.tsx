@@ -1,3 +1,4 @@
+"use client"
 import {IExperience} from "@common/types/IExperience";
 import Image from 'next/image'
 import {useExperienceQuery} from "@/services/experience";
