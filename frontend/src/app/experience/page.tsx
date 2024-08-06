@@ -3,7 +3,7 @@ import ExperienceButton from "@/components/experience/ExperienceButton";
 
 function Page() {
     return (
-        <main className={'abs-center'}>
+        <main>
             <ExperienceButton/>
             <ExperienceList/>
         </main>
