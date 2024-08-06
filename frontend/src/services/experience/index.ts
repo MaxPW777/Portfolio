@@ -10,8 +10,8 @@ export const useCreateExperienceMutation = () => {
     const queryClient = useQueryClient()
     return useMutation(
         (experience: ICreateExperienceDto) => addExperience(experience), {
-        onSuccess: () => {
-            queryClient.invalidateQueries('experience')
-        }
-    });
+            onSuccess: () => {
+                queryClient.invalidateQueries('experience')
+            }
+        });
 }

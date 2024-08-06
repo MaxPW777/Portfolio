@@ -5,12 +5,15 @@ import {IExperience} from "@common/types/IExperience";
 
 const EXPERIENCE_URL = `${API_URL}/experience`
 
-export const getExperiences = async () : Promise<IExperience[]> => axios.get(EXPERIENCE_URL)
+export const getExperiences = async () : Promise<IExperience[]> => {
+    const response = await fetch(EXPERIENCE_URL);
+    return response.json();
+}
 
 export const addExperience = async (experience: ICreateExperienceDto) : Promise<IExperience> => {
-    const formData = new FormData();
+    const formData : FormData = new FormData();
     formData.append('company', experience.company);
-    formData.append('content', experience.description);
+    formData.append('description', experience.description);
     formData.append('startDate', experience.startDate.toLocaleString())
     if (experience.endDate) {
         formData.append('endDate', experience.endDate.toLocaleString())
