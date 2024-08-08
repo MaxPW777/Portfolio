@@ -1,7 +1,7 @@
 import {
     Body,
-    Controller,
-    Get,
+    Controller, Delete,
+    Get, Param,
     Post,
     UploadedFile,
     UseGuards,
@@ -27,5 +27,11 @@ export class ExperienceController {
     @UseInterceptors(FileInterceptor('image'))
     addExperience(@Body() experience: CreateExperienceDto, @UploadedFile() file: Express.Multer.File) {
         return this.experienceService.addExperience(experience, file);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete(':id')
+    deleteExperience(@Param('id') id: string) {
+        return this.experienceService.deleteExperience(id);
     }
 }

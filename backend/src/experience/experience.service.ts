@@ -30,4 +30,10 @@ export class ExperienceService {
         });
         return createdExperience.save();
     }
+
+    async deleteExperience(id: string): Promise<IExperienceDocument> {
+        const experience = await this.experienceModel.findById(id);
+        await this.s3Service.deleteFile(experience.image.split('/').pop());
+        return this.experienceModel.findByIdAndDelete(id).exec();
+    }
 }
