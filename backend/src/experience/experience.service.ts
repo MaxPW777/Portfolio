@@ -14,7 +14,7 @@ export class ExperienceService {
     }
 
     async getAllExperiences(): Promise<IExperienceDocument[]> {
-        return this.experienceModel.find().exec()
+        return this.experienceModel.find().sort({startDate : 1}).exec()
     }
 
     async addExperience(experience : CreateExperienceDto, file : Express.Multer.File): Promise<IExperienceDocument> {
