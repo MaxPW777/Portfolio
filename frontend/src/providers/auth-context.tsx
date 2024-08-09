@@ -65,7 +65,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): ReactElemen
         localStorage.removeItem('refresh_token');
         setUser(null);
         delete axios.defaults.headers.Authorization;
-        router.push('/login');
     };
 
     return (
