@@ -11,7 +11,7 @@ const links = [
 
 function Navbar() {
     return (
-        <nav className={'w-fit fixed top-4 left-1/2 -translate-x-1/2 rounded-3xl border'}>
+        <nav className={'w-fit fixed top-4 left-1/2 -translate-x-1/2 rounded-3xl border z-20 bg-background shadow'}>
             <ul className={'flex gap-3 p-3 px-5'}>
                 {
                     links.map(link => (
