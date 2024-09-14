@@ -4,7 +4,6 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: ../  # Set the context to the parent directory of .docker, frontend, common, etc.
       dockerfile: ./frontend/Dockerfile
     ports:
       - "3000:3000"
@@ -13,7 +12,6 @@ services:
 
   backend:
     build:
-      context: ../  # Set the context to the parent directory of .docker, backend, common, etc.
       dockerfile: ./backend/Dockerfile
     ports:
       - "8080:8080"
