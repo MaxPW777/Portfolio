@@ -3,11 +3,16 @@ import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { RefreshTokenGuard } from './auth/refresh-token.guard';
+import {AppService} from "@/app.service";
 
 @Controller()
 export class AppController {
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private appService : AppService) {}
 
+    @Get('home')
+    getPostsProjects() {
+        return this.appService.getPostsProjects();
+    }
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Request() req) {
