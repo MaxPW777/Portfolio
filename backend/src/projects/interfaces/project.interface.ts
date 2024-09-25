@@ -1,4 +1,4 @@
-import {IProject} from "@common/types/IProject";
-import {Document} from "mongoose";
+import { IProject } from '@common/types/IProject';
+import { Document } from 'mongoose';
 
-export interface IProjectDocument extends Document, IProject{}
+export interface IProjectDocument extends Document, IProject {}

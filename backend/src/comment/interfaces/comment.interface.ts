@@ -1,5 +1,4 @@
-import {Document} from "mongoose";
-import {IComment} from "@common/types/IComment";
+import { Document } from 'mongoose';
+import { IComment } from '@common/types/IComment';
 
-export interface ICommentDocument extends Document, IComment {
-}
+export interface ICommentDocument extends Document, IComment {}

@@ -6,22 +6,22 @@ import { jwtConstants } from '@/auth/constants';
 
 @Injectable()
 export class RefreshJwtStrategy extends PassportStrategy(Strategy, 'jwt-refresh-token') {
-    constructor(private authService: AuthService) {
-        super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            ignoreExpiration: false,
-            secretOrKey: jwtConstants.refreshSecret,
-            passReqToCallback: true,
-        });
-    }
+  public constructor(private authService: AuthService) {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: jwtConstants.refreshSecret,
+      passReqToCallback: true,
+    });
+  }
 
-    async validate(req: any, payload: any) {
-        const refreshToken = req.get('Authorization').replace('Bearer', '').trim();
-        const user = await this.authService.validateRefreshToken(payload.sub, refreshToken);
+  public async validate(req: any, payload: any) {
+    const refreshToken = req.get('Authorization').replace('Bearer', '').trim();
+    const user = await this.authService.validateRefreshToken(payload.sub, refreshToken);
 
-        if (!user) {
-            throw new UnauthorizedException();
-        }
-        return user;
+    if (!user) {
+      throw new UnauthorizedException();
     }
+    return user;
+  }
 }

@@ -1,12 +1,12 @@
 import { IsNotEmpty, IsString } from '@nestjs/class-validator';
-import {IEditPostDto} from "@common/dto/IEditPostDto";
+import { IEditPostDto } from '@common/dto/IEditPostDto';
 
-export class EditPostDto implements IEditPostDto{
-    @IsNotEmpty()
-    @IsString()
-    title: string;
+export class EditPostDto implements IEditPostDto {
+  @IsNotEmpty()
+  @IsString()
+  public title: string;
 
-    @IsNotEmpty()
-    @IsString()
-    content: string;
+  @IsNotEmpty()
+  @IsString()
+  public content: string;
 }

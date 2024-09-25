@@ -1,0 +1,99 @@
+{
+  "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+  "project": ["tsconfig.json"],
+      "sourceType": "module",
+      "ecmaFeatures": {
+    "jsx": true
+  }
+},
+  "ignorePatterns": [
+  "dist/",
+  "node_modules/",
+  "scripts/",
+  ".eslintrc.js"
+],
+    "plugins": [
+  "@typescript-eslint",
+  "unused-imports",
+  "import",
+  "react",
+  "react-hooks"
+],
+    "extends": [
+  "plugin:@typescript-eslint/recommended",
+  "plugin:prettier/recommended",
+  "plugin:react/recommended",
+  "plugin:react-hooks/recommended"
+],
+    "env": {
+  "node": true,
+      "jest": true,
+      "browser": true,
+      "es2021": true
+},
+  "rules": {
+  "prettier/prettier": [
+    "error",
+    {
+      "semi": true,
+      "singleQuote": true,
+      "trailingComma": "all",
+      "bracketSpacing": true,
+      "printWidth": 120,
+      "tabWidth": 2,
+      "singleAttributePerLine": true,
+      "bracketSameLine": false,
+      "htmlWhitespaceSensitivity": "ignore",
+      "overrides": [
+        {
+          "files": "*.html",
+          "options": {
+            "parser": "html"
+          }
+        },
+        {
+          "files": "*.component.html",
+          "options": {
+            "parser": "angular"
+          }
+        }
+      ]
+    }
+  ],
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": "warn",
+      "@typescript-eslint/interface-name-prefix": "off",
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/explicit-function-return-type": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/require-await": "error",
+      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/explicit-member-accessibility": "error",
+      "@typescript-eslint/no-unused-vars": "off",
+      "import/order": "error",
+      "no-else-return": "error",
+      "no-duplicate-case": "error",
+      "no-duplicate-imports": "error",
+      "no-irregular-whitespace": "error",
+      "no-useless-constructor": "off",
+      "@typescript-eslint/no-useless-constructor": "error",
+      "eqeqeq": "error",
+      "no-extra-bind": "error",
+      "block-spacing": ["error", "always"],
+      "no-console": "warn",
+      "no-useless-catch": "error",
+      "no-useless-return": "error",
+      "eol-last": ["error", "always"],
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react/jsx-uses-vars": "error"
+},
+  "settings": {
+  "react": {
+    "version": "detect"
+  }
+}
+}

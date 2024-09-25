@@ -1,16 +1,16 @@
 import { IsEmail, IsNotEmpty, IsString } from '@nestjs/class-validator';
-import {ICreateUserDto} from "@common/dto/ICreateUserDto";
+import { ICreateUserDto } from '@common/dto/ICreateUserDto';
 
-export class CreateUserDto implements ICreateUserDto{
-    @IsNotEmpty()
-    @IsString()
-    name: string;
+export class CreateUserDto implements ICreateUserDto {
+  @IsNotEmpty()
+  @IsString()
+  public name: string;
 
-    @IsNotEmpty()
-    @IsEmail()
-    email: string;
+  @IsNotEmpty()
+  @IsEmail()
+  public email: string;
 
-    @IsNotEmpty()
-    @IsString()
-    password: string;
+  @IsNotEmpty()
+  @IsString()
+  public password: string;
 }
