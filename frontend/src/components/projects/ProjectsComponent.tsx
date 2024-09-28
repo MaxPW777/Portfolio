@@ -4,26 +4,164 @@ import {IProject} from "@common/types/IProject";
 import {
     Card, CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle
 } from "@/components/ui/card";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import Link from "next/link";
+
+
+const projectData = [
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e8d",
+        "name": "Portfolio",
+        "description": "Ce portfolio",
+        "languages": [
+            "TypeScript",
+            "Next.js",
+            "Nest.js",
+            "TailwindCSS",
+        ],
+        "link": "https://github.com/MaxPW777/Portfolio",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e8e",
+        "name": "myRecipeTracker",
+        "description": "My recipe tracking application",
+        "languages": [
+            "TypeScript",
+            "React",
+            "Node.js",
+            "ExpressJS"
+        ],
+        "link": "https://github.com/MaxPW777/myRecipeTracker",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e8f",
+        "name": "2048-Clone",
+        "description": "2048 game clone",
+        "languages": [
+            "C#",
+            "Unity"
+        ],
+        "link": "https://github.com/MaxPW777/2048-Clone",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e93",
+        "name": "C",
+        "description": "Une collection de programmes en C",
+        "languages": [
+            "C"
+        ],
+        "link": "https://github.com/MaxPW777/C",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e8f",
+        "name": "Angry-Bird-Clone",
+        "description": "Angry Bird Clone",
+        "languages": [
+            "Unity",
+            "C#"
+        ],
+        "link": "https://github.com/MaxPW777/Angry-Bird-Clone",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e90",
+        "name": "rust-passworder",
+        "description": "CLI password manager",
+        "languages": [
+            "Rust"
+        ],
+        "link": "https://github.com/MaxPW777/rust-passworder",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e92",
+        "name": "Flappy-Bird",
+        "description": "Flappy bird clone in Unity",
+        "languages": [
+            "C#", "Unity"
+        ],
+        "link": "https://github.com/MaxPW777/Flappy-Bird",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e96",
+        "name": "Duelling-Nexus-Clone",
+        "description": "Duelling Nexus Clone",
+        "languages": [
+            "TypeScript",
+            "React",
+            "Node.js",
+            "ExpressJS"
+        ],
+        "link": "https://github.com/MaxPW777/Duelling-Nexus-Clone",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e97",
+        "name": "Windows-Forms-Prison",
+        "description": "Card game using Windows Forms",
+        "languages": [
+            "C#",
+            "Windows Forms"
+        ],
+        "link": "https://github.com/MaxPW777/Windows-Forms-Prison",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e98",
+        "name": "DYdle-Jump",
+        "description": "Doodle Jump Clone",
+        "languages": [
+            "JavaScript",
+            "HTML",
+            "CSS"
+        ],
+        "link": "https://github.com/MaxPW777/DYdle-Jump",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e92",
+        "name": "Spotify-Clone",
+        "description": "Spotify clone in Next.js, Supabase, Tailwind, and PostgreSQL",
+        "languages": [
+            "TypeScript",
+            "Next.js",
+            "Supabase",
+            "PostgreSQL",
+        ],
+        "link": "https://github.com/MaxPW777/Spotify-Clone",
+        "__v": 0
+    },
+    {
+        "_id": "66f7d1e6cf2fe6cfb8b13e93",
+        "name": "PhPortfolio",
+        "description": "PHP-based portfolio",
+        "languages": [
+            "PHP"
+        ],
+        "link": "https://github.com/MaxPW777/PhPortfolio",
+        "__v": 0
+    }
+]
 
 function ProjectsComponent() {
     const query = useProjectQuery()
 
-    if (query.isLoading){
-        return <p>Loading...</p>
-    }
-    if (query.error){
-        return <p>Could not find projects</p>
-    }
     return (
-        <div className={'border'}>
-            {query.data && query.data.map((project : IProject) => {
+        <div className={'border grid grid-cols-3 gap-3'}>
+            {projectData.map((project : IProject) => {
                 return (
-                    <Link key={project.link} href={project.link}>
-                        <Card>
+                    <Link target={"_blank"} key={project.link} href={project.link}>
+                        <Card className="relative transition duration-300 ease-in-out hover:bg-[rgba(255,255,255,0.5)]">
+                            <FaExternalLinkAlt className="absolute right-2 top-2"/>
                             <CardHeader>
                                 <CardTitle>{project.name}</CardTitle>
                             </CardHeader>
@@ -32,6 +170,15 @@ function ProjectsComponent() {
                                     {project.description}
                                 </CardDescription>
                             </CardContent>
+                            <CardFooter>
+                                {project.languages.map((language) => {
+                                    return (
+                                        <span key={language} className="border p-1 mr-2 rounded">
+                        {language}
+                    </span>
+                                    );
+                                })}
+                            </CardFooter>
                         </Card>
                     </Link>
                 )

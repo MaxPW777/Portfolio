@@ -62,8 +62,13 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  height: 100vh;
   width: 100vw;
+  background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+}
+
+main {
+  height: calc(100vh - 5rem);
+  margin-top: 5rem;
 }
 
 @layer base {

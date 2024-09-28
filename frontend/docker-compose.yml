@@ -1,0 +1,12 @@
+# docker-compose.yml
+version: '3'
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - 'NODE_ENV=development'
+    volumes:
+      - './:/home/web'
+    ports:
+      - '3000:3000'

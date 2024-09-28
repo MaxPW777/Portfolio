@@ -1,20 +1,16 @@
-# backend/Dockerfile
+# frontend/Dockerfile
 FROM node:18-alpine
 
 WORKDIR /usr/app
-COPY common ./common
-
-# Set working directory
-WORKDIR /usr/app/frontend/
+COPY ./common ./common
 
 # Install dependencies
-COPY backend/package*.json ./
+COPY ./package*.json ./
 RUN npm install
 
 # Copy application and common code
-COPY frontend ./
+COPY ./ ./
 
-# Create a "dist" folder with the production build
 RUN npm run build
 
 # Expose the port the app runs on

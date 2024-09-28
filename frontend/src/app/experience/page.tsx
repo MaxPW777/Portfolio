@@ -5,7 +5,8 @@ function Page() {
     return (
         <>
             <ExperienceButton/>
-            <main className={'h-[calc(100vh-4rem)] w-full mt-16 flex items-center justify-center'}>
+            <main >
+                <h1 className="text-3xl font-bold mb-4 ml-7">Mes Expériences</h1>
                 <ExperienceList/>
             </main>
         </>
