@@ -6,7 +6,7 @@ import {ICreateProjectDto} from "@common/dto/ICreateProjectDto";
 export const useProjectQuery = () => {
     return useQuery('projects', getProjects)
 }
-export const createProjectMutation = () => {
+export const useCreateProjectMutation = () => {
     const queryClient = useQueryClient()
     return useMutation('project', {mutationFn : (data : ICreateProjectDto) => createProject(data), onSuccess: () => {
         queryClient.invalidateQueries('projects')

@@ -22,7 +22,7 @@ function ProjectsComponent() {
         <div className={'border'}>
             {query.data && query.data.map((project : IProject) => {
                 return (
-                    <Link href={project.link}>
+                    <Link key={project.link} href={project.link}>
                         <Card>
                             <CardHeader>
                                 <CardTitle>{project.name}</CardTitle>

@@ -13,7 +13,7 @@ const MediumPost: React.FC<MediumPostProps> = ({ post }) => {
         // @ts-ignore
         <Card onClick={() => setSelectedPost(post)} className={cn("cursor-pointer mb-4 hover:bg-gray-100 transition-all", selectedPost?._id === post._id && "bg-gray-100")}>
             <CardHeader>
-                <CardTitle>{post.title}</CardTitle>
+                <CardTitle className={'text-red-700'}>{post.title}</CardTitle>
             </CardHeader>
             <CardContent>
                 <p className="line-clamp-3">{post.content}</p>
