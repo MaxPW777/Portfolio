@@ -49,7 +49,7 @@ export function HomeItemsComponent() {
                 </Card>
                 <Card className={'bg-[rgba(0,0,0,0.1)]'}>
                     <CardHeader>
-                        <CardTitle>Recent Blog Posts</CardTitle>
+                        <CardTitle>Plus Recent Post</CardTitle>
                     </CardHeader>
                 </Card>
             </Link>
@@ -69,7 +69,7 @@ export function HomeItemsComponent() {
                 </Card>
                 <Card className={'bg-[rgba(0,0,0,0.1)]'}>
                     <CardHeader>
-                        <CardTitle>Check out my most recent projects</CardTitle>
+                        <CardTitle>Projet mis en avant</CardTitle>
                     </CardHeader>
                 </Card>
             </Link>
