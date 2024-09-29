@@ -1,26 +1,31 @@
 "use client"
 import React, {
     createContext,
-    useState,
-    useEffect,
-    useContext,
-    ReactNode,
     ReactElement,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState,
 } from 'react';
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import axios from 'axios';
-import { useLoginMutation } from '@/services/user';
+import {useLoginMutation} from '@/services/user';
 
 export interface AuthContextType {
     isAuthenticated: boolean;
-    login: ({ username, password }: { username: string; password: string }) => Promise<void>;
+    login: ({username, password}: {
+        username: string;
+        password: string
+    }) => Promise<void>;
     logout: () => void;
     loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-export const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
+export const AuthProvider = ({children}: {
+    children: ReactNode
+}): ReactElement => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
@@ -54,14 +59,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }): ReactElemen
         setAuthentication();
     }, []);
 
-    const login = async ({ username, password }: { username: string; password: string }) => {
+    const login = async ({username, password}: {
+        username: string;
+        password: string
+    }) => {
         try {
             if (username === 'max' && password === 'password') {
                 const access_token = 'user_logged_in';
                 const refresh_token = 'user_logged_in';
                 localStorage.setItem('access_token', access_token);
                 localStorage.setItem('refresh_token', refresh_token);
-            router.back();
+                router.back();
+                router.refresh();
             } else {
                 console.error('Login failed');
             }
@@ -78,7 +87,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): ReactElemen
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, loading }}>
+        <AuthContext.Provider value={{isAuthenticated, login, logout, loading}}>
             {children}
         </AuthContext.Provider>
     );
