@@ -1,18 +1,26 @@
 "use client"
 import CommentList from "@/components/blog/comments/CommentList";
 import CommentForm from "@/components/blog/comments/CommentForm";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useGetCommentsQuery } from "@/services/comment";
+import {IComment} from "@common/types/IComment";
+import {IPost, IPostDocument} from "@common/types/IPost";
+
 
 interface CommentAreaProps {
-    postId: string;
+    post: IPostDocument;
     onToggleExpand: (expand: boolean) => void;
 }
 
-function CommentArea({ postId, onToggleExpand }: CommentAreaProps) {
-    const query = useGetCommentsQuery(postId);
-    const [showComments, setShowComments] = useState(false);
+function CommentArea({ onToggleExpand, post}: CommentAreaProps) {
+    const [comments, setComments] = useState<IComment[]>(post.comments || []);
+    // const query = useGetCommentsQuery(postId);
 
+    useEffect(()=>{
+       setComments(post.comments)
+    },[post])
+
+    const [showComments, setShowComments] = useState(false);
     const toggleShowComments = () => {
         setShowComments(!showComments);
         onToggleExpand(!showComments);
@@ -26,8 +34,8 @@ function CommentArea({ postId, onToggleExpand }: CommentAreaProps) {
                     {showComments ? 'Hide comments' : 'See all comments'}
                 </button>
             </div>
-            <CommentForm postID={postId} />
-            {showComments && <CommentList comments={query.data} />}
+            <CommentForm selectedPost={post} setComments={setComments} />
+            {showComments && <CommentList comments={comments} />}
         </div>
     );
 }

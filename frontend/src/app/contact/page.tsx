@@ -33,10 +33,10 @@ const contactData = [{
 
 function ContactPage() {
     return (
-        <div className="flex abs-center gap-x-9">
+        <main className="flex abs-center gap-x-9">
             <ContactForm contactData={contactData}/>
             <ContactList contactData={contactData}/>
-        </div>
+        </main>
     );
 }
 

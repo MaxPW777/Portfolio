@@ -1,5 +1,5 @@
 export interface ICreatePostDto{
     title: string;
     content: string;
-    image?: File;
+    image?: string;
 }

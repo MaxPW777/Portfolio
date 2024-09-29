@@ -1,20 +1,21 @@
 "use client"
 import {createContext, ReactNode, useContext, useState} from 'react';
-import {IPost} from "@common/types/IPost";
+import {IPost, IPostDocument} from "@common/types/IPost";
+import {IComment} from "@common/types/IComment";
 
 interface SelectedPostProviderProps {
     children: ReactNode;
 }
 
 interface SelectedPostContextType {
-    selectedPost: IPost | null;
-    setSelectedPost: (post: IPost) => void;
+    selectedPost: IPostDocument | null;
+    setSelectedPost: (post: IPostDocument) => void;
 }
 
 const SelectedPostContext = createContext<SelectedPostContextType>({} as SelectedPostContextType);
 
 export const SelectedPostProvider = ({children}: SelectedPostProviderProps) => {
-    const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
+    const [selectedPost, setSelectedPost] = useState<IPostDocument | null>(null);
     return (
         <SelectedPostContext.Provider value={{selectedPost, setSelectedPost}}>
             {children}

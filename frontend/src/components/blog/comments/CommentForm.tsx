@@ -9,9 +9,13 @@ import {
 } from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
+import {IComment} from "@common/types/IComment";
+import {IPostDocument} from "@common/types/IPost";
+
 
 interface CommentFormProps {
-    postID: string;
+    selectedPost: IPostDocument
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
 }
 
 type commentForm = {
@@ -19,17 +23,23 @@ type commentForm = {
     author: string;
 }
 
-function CommentForm({postID}: CommentFormProps) {
+function CommentForm({selectedPost, setComments}: CommentFormProps) {
     const createCommentMutation = useCreateCommentMutation();
     const form = useForm<commentForm>();
 
     const onSubmit = async (data: commentForm) => {
         try {
-            await createCommentMutation.mutateAsync({
-                postID,
-                ...data
+            const newComment =({
+                ...data,
+                createdAt: new Date(),
+                updatedAt: new Date()
             });
-            form.reset();
+            selectedPost.comments.push(newComment)
+            setComments((prevComments) => [...prevComments])
+            form.reset({
+                content: "",
+                author: ""
+            });
         } catch (error) {
             console.error('Failed to create comment', error);
         }

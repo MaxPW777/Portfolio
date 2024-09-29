@@ -22,22 +22,39 @@ import {
 import { Input } from '../ui/input';
 import {Textarea} from "@/components/ui/textarea";
 import {useAuth} from "@/providers/auth-context";
+import {IPostDocument} from "@common/types/IPost";
 
-const NewPost: React.FC = () => {
+interface NewPostProps {
+    setPostData: React.Dispatch<React.SetStateAction<IPostDocument[]>>;
+}
+
+function NewPost({setPostData}: NewPostProps) {
     const {isAuthenticated} = useAuth()
-    const form = useForm<ICreatePostDto>({ defaultValues: {} as ICreatePostDto });
-    const mutation = useCreatePostMutation();
+    const form = useForm<ICreatePostDto>({ defaultValues: {
+        content: "",
+        title: "",
+        image: ""
+        } });
+    // const mutation = useCreatePostMutation();
 
     if (!isAuthenticated) return
 
     const onSubmit = async (data: ICreatePostDto) => {
         // Convert image field to File if it's not already
-        const imageFile = data.image instanceof FileList ? data.image[0] : data.image;
-        const postData : ICreatePostDto = { ...data, image: imageFile };
-
-
+        // const imageFile = data.image instanceof FileList ? data.image[0] : data.image;
+        // const postData : ICreatePostDto = { ...data, image: imageFile };
         try {
-            await mutation.mutateAsync(postData);
+            // await mutation.mutateAsync(postData);
+            const newPost = ({
+                ...data,
+                __v: 0,
+                author: 'Anonymous',
+                comments: [],
+                _id: Math.random().toString(),
+                created_at: new Date(),
+                updated_at: new Date()
+            })
+            setPostData((prevPosts) => [...prevPosts, newPost]);
             form.reset();
         } catch (error) {
             console.error('Failed to create post', error);
@@ -83,10 +100,10 @@ const NewPost: React.FC = () => {
                         <FormField control={form.control} name="image"
                                    render={({ field }) => (
                                        <FormItem>
-                                           <FormLabel>Image (not required) </FormLabel>
-                                           <FormControl>
-                                               <Input type='file' onChange={(e) => field.onChange(e.target.files?.[0])} />
-                                           </FormControl>
+                                             <FormLabel>Image</FormLabel>
+                                             <FormControl>
+                                                  <Input placeholder={'link to image'} {...field} />
+                                             </FormControl>
                                        </FormItem>
                                    )} />
                         <DialogClose asChild>

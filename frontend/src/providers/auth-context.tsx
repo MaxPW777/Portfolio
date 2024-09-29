@@ -13,7 +13,6 @@ import { useLoginMutation } from '@/services/user';
 
 export interface AuthContextType {
     isAuthenticated: boolean;
-    user: { userID: string};
     login: ({ username, password }: { username: string; password: string }) => Promise<void>;
     logout: () => void;
     loading: boolean;
@@ -22,38 +21,53 @@ export interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
-    const [user, setUser] = useState<any>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
     const loginMutation = useLoginMutation();
 
+    // useEffect(() => {
+    //     const loadUserFromLocalStorage = async () => {
+    //         const token = localStorage.getItem('access_token');
+    //         if (token) {
+    //             axios.defaults.headers.Authorization = `Bearer ${token}`;
+    //             try {
+    //                 const { data } = await axios.get('http://localhost:8080/profile');
+    //                 setUser(data);
+    //             } catch (error) {
+    //                 console.error('Error loading user from localStorage', error);
+    //                 logout();
+    //             }
+    //         }
+    //         setLoading(false);
+    //     };
+    //     loadUserFromLocalStorage();
+    // }, []);
+
     useEffect(() => {
-        const loadUserFromLocalStorage = async () => {
+        const setAuthentication = () => {
             const token = localStorage.getItem('access_token');
             if (token) {
-                axios.defaults.headers.Authorization = `Bearer ${token}`;
-                try {
-                    const { data } = await axios.get('http://localhost:8080/profile');
-                    setUser(data);
-                } catch (error) {
-                    console.error('Error loading user from localStorage', error);
-                    logout();
-                }
+                setIsAuthenticated(true);
             }
-            setLoading(false);
-        };
-        loadUserFromLocalStorage();
+        }
+        setAuthentication();
     }, []);
 
     const login = async ({ username, password }: { username: string; password: string }) => {
         try {
-            const { access_token, refresh_token, userid } = await loginMutation.mutateAsync({ username, password });
-            localStorage.setItem('access_token', access_token);
-            localStorage.setItem('refresh_token', refresh_token);
-            axios.defaults.headers.Authorization = `Bearer ${access_token}`;
-            const { data } = await axios.get('http://localhost:8080/profile');
-            setUser(data);
+            if (username === 'max' && password === 'password') {
+                const access_token = 'user_logged_in';
+                const refresh_token = 'user_logged_in';
+                localStorage.setItem('access_token', access_token);
+                localStorage.setItem('refresh_token', refresh_token);
             router.push('/');
+            } else {
+                console.error('Login failed');
+            }
+            // axios.defaults.headers.Authorization = `Bearer ${access_token}`;
+            // const { data } = await axios.get('http://localhost:8080/profile');
+            // setUser(data);
         } catch (error) {
             console.error('Login failed', error);
             throw error;
@@ -63,12 +77,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }): ReactElemen
     const logout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        setUser(null);
         delete axios.defaults.headers.Authorization;
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, logout, loading }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );

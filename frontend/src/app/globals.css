@@ -60,10 +60,10 @@
 }
 
 body {
-  background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   width: 100vw;
-  background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+  /*background-image: url('https://www.transparenttextures.com/patterns/paper.png');*/
+  background: linear-gradient(135deg, #bdc3c7 0%, white 100%);
 }
 
 main {

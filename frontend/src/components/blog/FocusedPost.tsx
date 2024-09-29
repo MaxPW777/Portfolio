@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CommentArea from "@/components/blog/comments/CommentArea";
 import DOMPurify from 'dompurify';
 import DeletePostButton from "@/components/blog/DeletePostButton";
@@ -7,6 +7,7 @@ import Image from "next/image";
 import {useSelectedPost} from "@/providers/SelectedPostProvider";
 import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {useAuth} from "@/providers/auth-context";
+import {IPostDocument} from "@common/types/IPost";
 
 
 function FocusedPost() {
@@ -14,9 +15,14 @@ function FocusedPost() {
     const {selectedPost} = useSelectedPost();
     const {isAuthenticated} = useAuth();
 
+    useEffect(() => {
+        console.log('selectedPost', selectedPost)
+    }, [selectedPost])
+
     if (!selectedPost) {
-        return <div className="w-1/2 p-4">Select a post to read</div>;
+        return <div className="w-1/2 p-10">Select a post to read</div>;
     }
+
 
     const sanitizedContent = DOMPurify.sanitize(selectedPost.content.replace(/\n/g, '<br />'));
 
@@ -51,7 +57,7 @@ function FocusedPost() {
             <div
                 className={`mt-4 flex gap-3 ${expandComments ? 'h-3/4' : 'h-1/4'} transition-all duration-500`}>
                 {/*@ts-ignore*/}
-                <CommentArea postId={selectedPost._id}
+                <CommentArea post={selectedPost}
                              onToggleExpand={setExpandComments}/>
             </div>
         </div>

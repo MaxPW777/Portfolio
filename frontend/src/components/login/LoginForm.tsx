@@ -28,7 +28,7 @@ function LoginForm() {
         password: string
     }) => {
         try {
-            await login({username, password});
+            await login({username, password})
         } catch (error) {
             console.error('Login failed', error);
         }
