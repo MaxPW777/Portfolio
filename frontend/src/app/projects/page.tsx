@@ -12,6 +12,7 @@ const projectData = [
             "Next.js",
             "Nest.js",
             "TailwindCSS",
+            "AWS"
         ],
         "link": "https://github.com/MaxPW777/Portfolio",
         "__v": 0

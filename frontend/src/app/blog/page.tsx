@@ -47,8 +47,8 @@ const postDataSource: IPostDocument[] = [
     },
     {
         "_id": "66a21f9cc7d77de641531c47",
-        "title": "This is an Image",
-        "content": "SO COOL",
+        "title": "Test Image",
+        "content": "Voici un test avec une image en utilisant Amazon S3",
         "author": "667174ede451d73f4461c3ed",
         "comments": [],
         "image": "https://maximilianpw-portfolio.s3.eu-central-1.amazonaws.com/e0c6e3fe-aac2-4be9-ad7a-ba7684cc3068",
