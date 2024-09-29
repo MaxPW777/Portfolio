@@ -150,7 +150,7 @@ export default function ProjectPage() {
     return (
         <main className={'mx-7'}>
             <h1 className="text-3xl font-bold mb-4">Mes Projets Github</h1>
-            <ProjectButton setProjectData={setProjectData} projectData={projectData}/>
+            {/*<ProjectButton setProjectData={setProjectData} projectData={projectData}/>*/}
             <ProjectsComponent projectData={projectData}/>
         </main>
     );
