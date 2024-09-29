@@ -61,13 +61,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }): ReactElemen
                 const refresh_token = 'user_logged_in';
                 localStorage.setItem('access_token', access_token);
                 localStorage.setItem('refresh_token', refresh_token);
-            router.push('/');
+            router.back();
             } else {
                 console.error('Login failed');
             }
-            // axios.defaults.headers.Authorization = `Bearer ${access_token}`;
-            // const { data } = await axios.get('http://localhost:8080/profile');
-            // setUser(data);
         } catch (error) {
             console.error('Login failed', error);
             throw error;

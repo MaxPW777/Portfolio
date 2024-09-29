@@ -15,8 +15,9 @@ import {IProject} from "@common/types/IProject";
 
 interface ProjectButtonProps {
     projectData: IProject[]
+    setProjectData: (data: IProject[]) => void
 }
-function ProjectButton({projectData}: ProjectButtonProps) {
+function ProjectButton({projectData, setProjectData}: ProjectButtonProps) {
     const {isAuthenticated} = useAuth();
 
     if (!isAuthenticated) return null;
@@ -34,7 +35,7 @@ function ProjectButton({projectData}: ProjectButtonProps) {
                         the database</DialogDescription>
                 </DialogHeader>
 
-                <ProjectForm projectData={projectData}/>
+                <ProjectForm setProjectData={setProjectData} projectData={projectData}/>
             </DialogContent>
         </Dialog>
     );

@@ -1,6 +1,8 @@
+"use client"
 import ExperienceList from "@/components/experience/ExperienceList";
 import ExperienceButton from "@/components/experience/ExperienceButton";
-const experienceData =
+import {useState} from "react";
+const experienceDataSource =
     [
         {
             "_id": "66b490cc7620d00dc41c0574",
@@ -30,9 +32,10 @@ const experienceData =
 
     ]
 function Page() {
+    const [experienceData, setExperienceData] = useState<any>(experienceDataSource);
     return (
         <>
-            <ExperienceButton experienceData={experienceData}/>
+            <ExperienceButton setExperienceData={setExperienceData} experienceData={experienceData}/>
             <main >
                 <h1 className="text-3xl font-bold mb-4 ml-7">Mes Expériences</h1>
                 <ExperienceList experienceData={experienceData}/>

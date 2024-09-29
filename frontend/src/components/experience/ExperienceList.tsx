@@ -49,12 +49,12 @@ function ExperienceList({experienceData}: ExperienceListProps) {
                         </div>
                         <div
                             className="w-2/3 h-full relative flex items-center justify-center">
-                            <Image
+                            {experience.image && <Image
                                 className="object-contain w-full h-full"
                                 fill={true}
                                 src={experience.image}
                                 alt={`${experience.company} image`}
-                            />
+                            />}
                         </div>
                     </Card>
 

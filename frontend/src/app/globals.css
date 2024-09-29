@@ -63,7 +63,7 @@ body {
   color: hsl(var(--foreground));
   width: 100vw;
   /*background-image: url('https://www.transparenttextures.com/patterns/paper.png');*/
-  background: linear-gradient(135deg, #bdc3c7 0%, white 100%);
+  background: linear-gradient(135deg, white 0%, #999ca1 100%);
 }
 
 main {

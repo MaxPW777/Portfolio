@@ -10,15 +10,9 @@ import {
 
 function HomeSidebar() {
     return (
-        <div className="flex h-full flex-col p-6 space-y-4">
+        <div className="flex h-full flex-col p-6 bg-[rgba(255,255,255,0.7)] space-y-4">
             <span className="font-semibold text-lg">Navigation</span>
             <nav className="flex flex-col space-y-2 w-full">
-                <Link href="/about" passHref>
-                    <Button variant="ghost" className="w-full justify-start">
-                        <UserIcon className="mr-2 h-5 w-5" />
-                        About
-                    </Button>
-                </Link>
                 <Link href="/projects" passHref>
                     <Button variant="ghost" className="w-full justify-start">
                         <BriefcaseIcon className="mr-2 h-5 w-5" />

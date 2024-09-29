@@ -1,4 +1,3 @@
-"use client";
 import {
     Card,
     CardContent,
@@ -7,9 +6,6 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import Link from 'next/link';
-import {Button} from '@/components/ui/button';
-import {useGetHomeItemsQuery} from '@/services/home';
-
 const homeData = {
     post: {
         "_id": "66f50d66d6081a71db9d4246",
@@ -38,7 +34,6 @@ const homeData = {
 
 
 export function HomeItemsComponent() {
-    const query = useGetHomeItemsQuery();
     return (
         <div className={'flex flex-col gap-20'}>
             <Link className={'flex flex-col gap-4'} href={'/blog'}>

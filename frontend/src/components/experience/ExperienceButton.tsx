@@ -14,9 +14,10 @@ import {IExperience} from "@common/types/IExperience";
 
 interface ExperienceButtonProps {
     experienceData: IExperience[]
+    setExperienceData: (data: IExperience[]) => void
 }
 
-function ExperienceButton({experienceData}: ExperienceButtonProps) {
+function ExperienceButton({experienceData, setExperienceData}: ExperienceButtonProps) {
     const {isAuthenticated} = useAuth();
 
     if (!isAuthenticated) return null;
@@ -33,7 +34,7 @@ function ExperienceButton({experienceData}: ExperienceButtonProps) {
                     <DialogDescription>Use this form to add a new Experience to
                         the database</DialogDescription>
                 </DialogHeader>
-                <NewExperienceForm experienceData={experienceData}/>
+                <NewExperienceForm setExperienceData={setExperienceData} experienceData={experienceData}/>
 
             </DialogContent>
         </Dialog>

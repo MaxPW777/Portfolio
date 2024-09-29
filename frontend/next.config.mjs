@@ -3,8 +3,8 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'https',
-                hostname: 'maximilianpw-portfolio.s3.eu-central-1.amazonaws.com'
+                protocol: "https",
+                hostname: "**",
             },
         ],
     },

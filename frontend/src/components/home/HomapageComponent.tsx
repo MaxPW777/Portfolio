@@ -19,9 +19,9 @@ function HomepageComponent() {
                 <div
                     className="flex h-full items-center justify-center p-6 relative">
                     <div
-                        className="space-y-6 h-full w-full flex items-end justify-between">
+                        className="space-y-6 h-full w-full flex items-center justify-between">
                         <div
-                            className="flex flex-col max-w-[350px] justify-between text-center bg-white py-8 px-4 rounded-lg shadow-lg">
+                            className="flex flex-col max-w-[380px] justify-between text-center bg-white py-8 px-4 rounded-lg shadow-lg">
                             <h1 className="text-4xl font-bold mb-6 text-gray-900">A propos de moi</h1>
                             <p className="text-gray-700 text-lg leading-relaxed mb-6">
                                 Je suis un développeur web junior passionné,
@@ -47,7 +47,7 @@ function HomepageComponent() {
                                 développer mes compétences.
                             </p>
                         </div>
-                        <Image width={'650'} height={'650'} alt={'CV Image'}
+                        <Image width={'550'} height={'550'} alt={'CV Image'}
                                src={'/CV2.png'}/>
                         <HomeItemsComponent/>
                     </div>

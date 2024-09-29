@@ -21,14 +21,15 @@ import {CalendarIcon} from "lucide-react";
 import {IExperience} from "@common/types/IExperience";
 interface NewExperienceFormProps {
     experienceData: IExperience[]
+    setExperienceData: (data: any) => void
 }
-function NewExperienceForm({experienceData}: NewExperienceFormProps) {
+function NewExperienceForm({experienceData, setExperienceData}: NewExperienceFormProps) {
     const form = useForm<ICreateExperienceDto>({defaultValues: {} as ICreateExperienceDto});
-    const mutation = useCreateExperienceMutation();
-
+    const experiencelinkregex = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
     const onSubmit = async (data: ICreateExperienceDto) => {
         try {
             experienceData.push(data);
+            setExperienceData((prev: any) => [...prev]);
             form.reset();
         } catch (error) {
             console.error("Failed to create experience", error);
@@ -71,7 +72,7 @@ function NewExperienceForm({experienceData}: NewExperienceFormProps) {
                 <FormField
                     control={form.control}
                     name="image"
-                    rules={{required: "Image is required"}}
+                    rules={{pattern: {value: experiencelinkregex, message: "Invalid URL"}}}
                     render={({field, fieldState}) => (
                         <FormItem>
                             <FormLabel>Image</FormLabel>

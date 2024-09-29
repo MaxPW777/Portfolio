@@ -2,6 +2,7 @@
 import {useGetContactsQuery} from "@/services/contact";
 import {IContactRequest} from "@common/types/IContactRequest";
 import {useAuth} from "@/providers/auth-context";
+import Link from "next/link";
 
 interface IContactListProps {
     contactData: IContactRequest[];
@@ -11,7 +12,13 @@ function ContactList({contactData}: IContactListProps) {
     const {isAuthenticated} = useAuth()
 
     if (!isAuthenticated) {
-        return
+        return <div>
+            <p>
+                afin de voir les messages et decouvrir le site veuillez vous connecter sur le compte administateur
+                <Link href={'/login'}>CLIQUEZ ICI</Link>
+                avec le nom d&#39;utilisateur: <strong>max</strong> et le mot de passe: <strong>password</strong>
+            </p>
+        </div>
     }
 
     return (
