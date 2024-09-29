@@ -80,3 +80,4 @@ fabric.properties
 
 # node
 node_modules/
+.vercel
