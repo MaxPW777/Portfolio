@@ -16,13 +16,16 @@ import {Input} from "@/components/ui/input";
 import {Textarea} from "@/components/ui/textarea";
 import { ICreateProjectDto } from '@common/dto/ICreateProjectDto';
 import { useCreateProjectMutation } from '@/services/projects';
+import {IProject} from "@common/types/IProject";
+interface NewProjectFormProps {
+    projectData: IProject[]
+}
 
-function NewProjectForm() {
+function NewProjectForm({projectData}: NewProjectFormProps) {
   const form = useForm<ICreateProjectDto>({defaultValues: {} as ICreateProjectDto});
-  const mutation = useCreateProjectMutation();
 
   const onSubmit = async (data: ICreateProjectDto) => {
-    mutation.mutate(data);
+    projectData.push(data);
   };
 
   return (

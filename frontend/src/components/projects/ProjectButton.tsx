@@ -11,8 +11,12 @@ import {Button} from "@/components/ui/button";
 import {useAuth} from "@/providers/auth-context";
 import NewExperienceForm from "@/components/experience/NewExperienceForm";
 import ProjectForm from "./ProjectForm";
+import {IProject} from "@common/types/IProject";
 
-function ProjectButton() {
+interface ProjectButtonProps {
+    projectData: IProject[]
+}
+function ProjectButton({projectData}: ProjectButtonProps) {
     const {isAuthenticated} = useAuth();
 
     if (!isAuthenticated) return null;
@@ -30,7 +34,7 @@ function ProjectButton() {
                         the database</DialogDescription>
                 </DialogHeader>
 
-                <ProjectForm/>
+                <ProjectForm projectData={projectData}/>
             </DialogContent>
         </Dialog>
     );

@@ -18,17 +18,17 @@ import {Calendar} from "@/components/ui/calendar";
 import {cn} from "@/lib/utils";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {CalendarIcon} from "lucide-react";
-
-function NewExperienceForm() {
+import {IExperience} from "@common/types/IExperience";
+interface NewExperienceFormProps {
+    experienceData: IExperience[]
+}
+function NewExperienceForm({experienceData}: NewExperienceFormProps) {
     const form = useForm<ICreateExperienceDto>({defaultValues: {} as ICreateExperienceDto});
     const mutation = useCreateExperienceMutation();
 
     const onSubmit = async (data: ICreateExperienceDto) => {
-        const imageFile = data.image instanceof FileList ? data.image[0] : data.image;
-        const experienceDto: ICreateExperienceDto = {...data, image: imageFile};
-
         try {
-            await mutation.mutateAsync(experienceDto);
+            experienceData.push(data);
             form.reset();
         } catch (error) {
             console.error("Failed to create experience", error);
@@ -76,8 +76,7 @@ function NewExperienceForm() {
                         <FormItem>
                             <FormLabel>Image</FormLabel>
                             <FormControl>
-                                <Input type="file"
-                                       onChange={(e) => field.onChange(e.target.files?.[0])}/>
+                                <Input placeholder="Image Url" {...field}/>
                             </FormControl>
                             <FormMessage>{fieldState.error?.message}</FormMessage>
                         </FormItem>

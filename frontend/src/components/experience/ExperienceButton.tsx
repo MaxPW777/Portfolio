@@ -10,8 +10,13 @@ import {
 import {Button} from "@/components/ui/button";
 import {useAuth} from "@/providers/auth-context";
 import NewExperienceForm from "@/components/experience/NewExperienceForm";
+import {IExperience} from "@common/types/IExperience";
 
-function ExperienceButton() {
+interface ExperienceButtonProps {
+    experienceData: IExperience[]
+}
+
+function ExperienceButton({experienceData}: ExperienceButtonProps) {
     const {isAuthenticated} = useAuth();
 
     if (!isAuthenticated) return null;
@@ -28,7 +33,7 @@ function ExperienceButton() {
                     <DialogDescription>Use this form to add a new Experience to
                         the database</DialogDescription>
                 </DialogHeader>
-                <NewExperienceForm/>
+                <NewExperienceForm experienceData={experienceData}/>
 
             </DialogContent>
         </Dialog>

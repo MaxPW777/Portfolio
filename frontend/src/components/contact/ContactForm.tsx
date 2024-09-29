@@ -15,9 +15,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IContactRequestDto } from "@common/dto/IContactRequestDto";
 
-export function ContactForm() {
+interface IContactFormProps {
+    contactData: IContactRequestDto[];
+}
+
+export function ContactForm({ contactData }: IContactFormProps) {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const mutation = useCreateContactMutation();
 
     const form = useForm({
         defaultValues: {
@@ -28,7 +31,7 @@ export function ContactForm() {
     });
 
     const onSubmit = (data: IContactRequestDto) => {
-        mutation.mutate(data);
+        contactData.push(data);
         form.reset();
     };
 
